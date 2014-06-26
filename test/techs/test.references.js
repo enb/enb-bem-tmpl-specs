@@ -63,10 +63,7 @@ describe('techs', function () {
         it('must provide empty references', function (done) {
             runBaseTechs('empty')
                 .spread(function (res) {
-                    res.must.be.eql({
-                        bemjsons: {},
-                        htmls: {}
-                    });
+                    res.must.be.eql({});
                 })
                 .then(done, done);
         });
@@ -75,10 +72,9 @@ describe('techs', function () {
             runBaseTechs('only-bemjson')
                 .spread(function (res) {
                     res.must.be.eql({
-                        bemjsons: {
-                            'only-bemjson': { block: 'one' }
-                        },
-                        htmls: {}
+                        'only-bemjson': {
+                            bemjson: { block: 'one' }
+                        }
                     });
                 })
                 .then(done, done);
@@ -88,9 +84,8 @@ describe('techs', function () {
             runBaseTechs('only-html')
                 .spread(function (res) {
                     res.must.be.eql({
-                        bemjsons: {},
-                        htmls: {
-                            'only-html': '<html>one</html>'
+                        'only-html': {
+                            html: '<html>one</html>'
                         }
                     });
                 })
@@ -101,10 +96,9 @@ describe('techs', function () {
             runBaseTechs('override-bemjson')
                 .spread(function (res) {
                     res.must.be.eql({
-                        bemjsons: {
-                            'only-bemjson': { block: 'two' }
-                        },
-                        htmls: {}
+                        'only-bemjson': {
+                            bemjson: { block: 'two' }
+                        }
                     });
                 })
                 .then(done, done);
@@ -114,9 +108,8 @@ describe('techs', function () {
             runBaseTechs('override-html')
                 .spread(function (res) {
                     res.must.be.eql({
-                        bemjsons: {},
-                        htmls: {
-                            'only-html': '<html>two</html>'
+                        'only-html': {
+                            html: '<html>two</html>'
                         }
                     });
                 })
@@ -127,11 +120,9 @@ describe('techs', function () {
             runBaseTechs('fully')
                 .spread(function (res) {
                     res.must.be.eql({
-                        bemjsons: {
-                            'fully': { block: 'fully' }
-                        },
-                        htmls: {
-                            'fully': '<html>fully</html>'
+                        'fully': {
+                            bemjson: { block: 'fully' },
+                            html: '<html>fully</html>'
                         }
                     });
                 })
