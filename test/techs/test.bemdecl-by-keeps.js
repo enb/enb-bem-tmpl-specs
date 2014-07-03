@@ -48,7 +48,7 @@ describe('techs', function () {
             bundles['block-bool-mod'].runTechAndRequire(bemdeclByKeepsTech)
                 .spread(function (res) {
                     res.deps.must.eql([
-                        { block: 'block', mod: 'mod', val: true }
+                        { block: 'block', mod: 'mod' }
                     ]);
                 })
                 .then(done, done);
@@ -78,7 +78,7 @@ describe('techs', function () {
             bundles['elem-bool-mod'].runTechAndRequire(bemdeclByKeepsTech)
                 .spread(function (res) {
                     res.deps.must.eql([
-                        { block: 'block', elem: 'elem', mod: 'mod', val: true }
+                        { block: 'block', elem: 'elem', mod: 'mod' }
                     ]);
                 })
                 .then(done, done);
@@ -99,9 +99,9 @@ describe('techs', function () {
                 .spread(function (res) {
                     res.deps.must.eql([
                         { block: 'block' },
-                        { block: 'block', mod: 'mod', val: true },
+                        { block: 'block', mod: 'mod' },
                         { block: 'block', elem: 'elem' },
-                        { block: 'block', elem: 'elem', mod: 'mod', val: true }
+                        { block: 'block', elem: 'elem', mod: 'mod' }
                     ]);
                 })
                 .then(done, done);
