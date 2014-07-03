@@ -5,7 +5,7 @@ var tmplSpecsSets = require(rootPath);
 module.exports = function (config) {
     var tmplSpecs = tmplSpecsSets.create('tmpl-specs', config);
 
-    tmplSpecs.build({
+    tmplSpecs.configure({
         destPath: 'tmpl-specs',
         levels: getLevels(config),
         sourceLevels: getSourceLevels(config)
