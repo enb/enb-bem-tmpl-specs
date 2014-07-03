@@ -20,7 +20,7 @@
     "node": ">= 0.10.0"
   },
   "dependencies": {
-    "enb-bem-sets": "0.3.12",
+    "enb-bem-sets": "0.3.14",
     "enb-bemxjst": "1.2.0",
     "enb-bh": "0.2.1",
     "bh": "2.1.0",
