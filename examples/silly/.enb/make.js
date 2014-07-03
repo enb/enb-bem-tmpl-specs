@@ -12,7 +12,7 @@ module.exports = function (config) {
     });
 };
 
-function getLevels(config) {
+function getLevels (config) {
     return [
         'blocks'
     ].map(function (level) {
@@ -20,7 +20,7 @@ function getLevels(config) {
     });
 }
 
-function getSourceLevels(config) {
+function getSourceLevels (config) {
     return [
         { path: '../libs/bem-core/common.blocks', check: false },
         'blocks'
