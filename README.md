@@ -5,7 +5,7 @@ enb-bem-tmpl-specs [![NPM version](https://badge.fury.io/js/enb-bem-tmpl-specs.s
 ----------
 
 ```
-$ npm install --save-dev enb-bem-specs
+$ npm install --save-dev enb-bem-tmpl-specs
 ```
 
 Для работы модуля требуется зависимость от пакета enb версии 0.12.0 или выше.
