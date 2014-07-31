@@ -29,8 +29,7 @@
     "html-differ": "0.3.2",
     "vow": "0.4.4",
     "inherit": "2.2.2",
-    "mocha": "1.20.1",
-    "should": "4.0.4"
+    "mocha": "1.20.1"
   },
   "devDependencies": {
     "enb": "git://github.com/enb-make/enb.git#18571c0d61a6b861f675352b8bb1d02166cdf59a",
