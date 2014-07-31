@@ -1,12 +1,9 @@
 var assert = require('assert');
 var dropRequireCache = require('enb/lib/fs/drop-require-cache');
-var htmlDiffer = require('${ htmlDifferFilename }');
+var HtmlDiffer = require('${ htmlDifferFilename }').HtmlDiffer;
+var htmlDiffer = new HtmlDiffer({ bem: true });
 var referencesFilename = '${ referencesFilename }';
 var references = require(referencesFilename);
-var diffOptions = {
-    ignoreHtmlAttrs: ['id', 'for'],
-    compareHtmlAttrsAsJSON: ['data-bem']
-};
 <% _.forEach(engines, function(engine) {
 %>var ${ engine.name } = require('${ engine.filename }')${ engine.filed };
 <%
@@ -34,7 +31,7 @@ describe('${ describe }', function() {
 });
 
 function assertHtml(expectedHtml, actualHtml) {
-    htmlDiffer.isEqual(expectedHtml, actualHtml, diffOptions) ?
+    htmlDiffer.isEqual(expectedHtml, actualHtml) ?
         assert.ok(expectedHtml) :
         assert.fail(actualHtml, expectedHtml, null, '\n');
 }

@@ -26,7 +26,7 @@
   "dependencies": {
     "enb-bem-sets": "0.3.14",
     "bem-naming": "0.1.0",
-    "html-differ": "0.3.2",
+    "html-differ": "0.5.0",
     "vow": "0.4.4",
     "inherit": "2.2.2",
     "mocha": "1.20.1",
