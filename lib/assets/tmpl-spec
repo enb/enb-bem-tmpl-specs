@@ -1,0 +1,40 @@
+var assert = require('assert');
+var dropRequireCache = require('enb/lib/fs/drop-require-cache');
+var htmlDiffer = require('${ htmlDifferFilename }');
+var referencesFilename = '${ referencesFilename }';
+var references = require(referencesFilename);
+var diffOptions = {
+    ignoreHtmlAttrs: ['id', 'for'],
+    compareHtmlAttrsAsJSON: ['data-bem']
+};
+<% _.forEach(engines, function(engine) {
+%>var ${ engine.name } = require('${ engine.filename }')${ engine.filed };
+<%
+}); %>
+describe('${ describe }', function() {
+    beforeEach(function () {
+        dropRequireCache(require, referencesFilename);
+        references = require(referencesFilename);
+    });
+    <% _.forEach(its, function(it) {
+       _.forEach(engines, function(engine) {
+
+    %>
+    it('should be equal `${ it }` by ${ engine.name }', function () {
+        var bemjson = references['${ it }'].bemjson;
+        var expectedHtml = references['${ it }'].html;
+        var actualHtml = ${ engine.name }.apply(bemjson);
+
+        assertHtml(expectedHtml, actualHtml);;
+    });
+    <%
+
+    });
+    }); %>
+});
+
+function assertHtml(expectedHtml, actualHtml) {
+    htmlDiffer.isEqual(expectedHtml, actualHtml, diffOptions) ?
+        assert.ok(expectedHtml) :
+        assert.fail(actualHtml, expectedHtml, null, '\n');
+}
