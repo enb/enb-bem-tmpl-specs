@@ -2,16 +2,15 @@ var assert = require('assert');
 var dropRequireCache = require('enb/lib/fs/drop-require-cache');
 var HtmlDiffer = require('${ htmlDifferFilename }').HtmlDiffer;
 var htmlDiffer = new HtmlDiffer({ bem: true });
-var referencesFilename = '${ referencesFilename }';
-var references = require(referencesFilename);
+var references = require('${ referencesFilename }');
 <% _.forEach(engines, function(engine) {
-%>var ${ engine.name } = require('${ engine.filename }')${ engine.filed };
+%>var ${ engine.name } = require('${ engine.path }')${ engine.exportName };
 <%
 }); %>
 describe('${ describe }', function() {
     beforeEach(function () {
-        dropRequireCache(require, referencesFilename);
-        references = require(referencesFilename);
+        dropRequireCache(require, '${ referencesFilename }');
+        references = require('${ referencesFilename }');
     });
     <% _.forEach(its, function(it) {
        _.forEach(engines, function(engine) {
@@ -22,7 +21,7 @@ describe('${ describe }', function() {
         var expectedHtml = references['${ it }'].html;
         var actualHtml = ${ engine.name }.apply(bemjson);
 
-        assertHtml(expectedHtml, actualHtml);;
+        assertHtml(expectedHtml, actualHtml);
     });
     <%
 
