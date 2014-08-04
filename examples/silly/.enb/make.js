@@ -20,12 +20,10 @@ module.exports = function (config) {
             },
             bemhtmlDev: {
                 tech: 'enb-bemxjst/techs/bemhtml-old',
-                exportName: 'BEMHTML',
                 options: { devMode: true }
             },
             bemhtmlProd: {
                 tech: 'enb-bemxjst/techs/bemhtml-old',
-                exportName: 'BEMHTML',
                 options: { devMode: false }
             }
         }
