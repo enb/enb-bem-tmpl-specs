@@ -27,6 +27,7 @@
     "enb-bem-sets": ">= 0.5.0"
   },
   "dependencies": {
+    "enb-bem": "0.1.0-alpha2",
     "enb-bem-pseudo-levels": "0.2.0",
     "bem-naming": "0.1.0",
     "html-differ": "0.5.0",
