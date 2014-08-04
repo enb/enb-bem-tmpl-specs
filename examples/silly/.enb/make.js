@@ -1,9 +1,10 @@
 var path = require('path');
 var rootPath = path.join(__dirname, '..', '..', '..');
-var tmplSpecsSets = require(rootPath);
 
 module.exports = function (config) {
-    var tmplSpecs = tmplSpecsSets.create('tmpl-specs', config);
+    config.includeConfig(rootPath);
+
+    var tmplSpecs = config.module('enb-bem-tmpl-specs').createConfigurator('tmpl-specs');
 
     tmplSpecs.configure({
         destPath: 'tmpl-specs',
