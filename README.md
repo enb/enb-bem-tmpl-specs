@@ -1,7 +1,7 @@
 enb-bem-tmpl-specs
 =============
 
-[![NPM version](https://badge.fury.io/js/enb-bem-tmpl-specs.svg)](http://badge.fury.io/js/enb-bem-tmpl-specs) [![Build Status](https://travis-ci.org/andrewblond/enb-bem-tmpl-specs.svg?branch=master)](https://travis-ci.org/andrewblond/enb-bem-tmpl-specs) [![Dependency Status](https://david-dm.org/andrewblond/enb-bem-tmpl-specs.svg)](https://david-dm.org/andrewblond/enb-bem-tmpl-specs)
+[![NPM version](https://badge.fury.io/js/enb-bem-tmpl-specs.svg)](http://badge.fury.io/js/enb-bem-tmpl-specs) [![Build Status](https://travis-ci.org/enb-bem/enb-bem-tmpl-specs.svg?branch=master)](https://travis-ci.org/enb-bem/enb-bem-tmpl-specs) [![Dependency Status](https://david-dm.org/enb-bem/enb-bem-tmpl-specs.svg)](https://david-dm.org/enb-bem/enb-bem-tmpl-specs)
 
 Установка:
 ----------
