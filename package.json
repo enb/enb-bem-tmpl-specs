@@ -34,8 +34,7 @@
     "vow": "0.4.5",
     "inherit": "2.2.2",
     "mocha": "1.21.3",
-    "lodash": "2.4.1",
-    "colors": "0.6.2"
+    "lodash": "2.4.1"
   },
   "optionalDependencies": {
     "enb-bh": "*",
