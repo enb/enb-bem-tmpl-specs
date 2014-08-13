@@ -36,10 +36,6 @@
     "mocha": "1.21.3",
     "lodash": "2.4.1"
   },
-  "optionalDependencies": {
-    "enb-bh": "*",
-    "enb-bemxjst": "*"
-  },
   "devDependencies": {
     "enb-magic-factory": "0.1.x",
     "enb-validate-code": "0.0.1",
