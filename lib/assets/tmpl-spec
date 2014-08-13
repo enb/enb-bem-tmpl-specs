@@ -3,7 +3,7 @@ var dropRequireCache = require('enb/lib/fs/drop-require-cache');
 var HtmlDiffer = require('html-differ').HtmlDiffer;
 var htmlDiffer = new HtmlDiffer({ bem: true });
 <% _.forEach(engines, function(engine) {
-%>var ${ engine.name } = require('${ engine.path }')${ engine.exportName };
+%>var ${ engine.varname } = require('${ engine.path }')${ engine.exportName };
 <%
 }); %>var referencesFilename = require.resolve('${ referencesFilename }');
 var references;
@@ -20,7 +20,7 @@ describe('${ describe }', function() {
     it('should be equal `${ it }` by ${ engine.name }', function () {
         var bemjson = references['${ it }'].bemjson;
         var expectedHtml = references['${ it }'].html;
-        var actualHtml = ${ engine.name }.apply(bemjson);
+        var actualHtml = ${ engine.varname }.apply(bemjson);
 
         assertHtml(expectedHtml, actualHtml);
     });

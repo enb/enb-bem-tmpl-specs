@@ -19,11 +19,11 @@ module.exports = function (config) {
                     jsAttrScheme: 'json'
                 }
             },
-            bemhtmlDev: {
+            'bemhtml-dev': {
                 tech: 'enb-bemxjst/techs/bemhtml-old',
                 options: { devMode: true }
             },
-            bemhtmlProd: {
+            'bemhtml-prod': {
                 tech: 'enb-bemxjst/techs/bemhtml-old',
                 options: { devMode: false }
             }
