@@ -1,16 +1,17 @@
 var assert = require('assert');
 var dropRequireCache = require('enb/lib/fs/drop-require-cache');
-var HtmlDiffer = require('${ htmlDifferFilename }').HtmlDiffer;
+var HtmlDiffer = require('html-differ').HtmlDiffer;
 var htmlDiffer = new HtmlDiffer({ bem: true });
-var references = require('${ referencesFilename }');
 <% _.forEach(engines, function(engine) {
 %>var ${ engine.name } = require('${ engine.path }')${ engine.exportName };
 <%
-}); %>
+}); %>var referencesFilename = require.resolve('${ referencesFilename }');
+var references;
+
 describe('${ describe }', function() {
     beforeEach(function () {
-        dropRequireCache(require, '${ referencesFilename }');
-        references = require('${ referencesFilename }');
+        dropRequireCache(require, referencesFilename);
+        references = require(referencesFilename);
     });
     <% _.forEach(its, function(it) {
        _.forEach(engines, function(engine) {

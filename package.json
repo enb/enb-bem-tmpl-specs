@@ -55,7 +55,7 @@
     "test": "npm run lint && mocha test/techs",
     "lint": "jshint . && jscs -c .jscs.js .",
     "deps": "cd examples && bower i",
-    "build": "cd examples/silly && enb make __magic__ tmpl-specs",
+    "build": "enb -d examples/silly make __magic__ tmpl-specs",
     "clean": "rm -rf examples/*/*tmpl-specs && rm -rf examples/*/.enb/tmp && rm -rf"
   }
 }
