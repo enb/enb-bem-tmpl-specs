@@ -1,6 +1,6 @@
 var assert = require('assert');
 var dropRequireCache = require('enb/lib/fs/drop-require-cache');
-var HtmlDiffer = require('html-differ').HtmlDiffer;
+var HtmlDiffer = require('${ htmlDifferFilename }').HtmlDiffer;
 var htmlDiffer = new HtmlDiffer({ bem: true });
 <% _.forEach(engines, function(engine) {
 %>var ${ engine.varname } = require('${ engine.path }')${ engine.exportName };
