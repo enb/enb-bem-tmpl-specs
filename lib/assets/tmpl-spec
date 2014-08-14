@@ -1,3 +1,5 @@
+var fs = require('fs');
+var path = require('path');
 var assert = require('assert');
 var dropRequireCache = require('enb/lib/fs/drop-require-cache');
 var HtmlDiffer = require('${ htmlDifferFilename }').HtmlDiffer;
@@ -17,21 +19,32 @@ describe('${ describe }', function() {
        _.forEach(engines, function(engine) {
 
     %>
-    it('should be equal `${ it }` by ${ engine.name }', function () {
+    it('should be equal `${ it }` by ${ engine.name }', function (done) {
         var bemjson = references['${ it }'].bemjson;
         var expectedHtml = references['${ it }'].html;
         var actualHtml = ${ engine.varname }.apply(bemjson);
 
-        assertHtml(expectedHtml, actualHtml);
+        var htmlPath = '${ engine.filename }' + '.html';
+
+        if (${ saveHtml }) {
+            fs.writeFile(htmlPath, actualHtml, compare);
+            return;
+        }
+
+        compare();
+
+        function compare() {
+            if (htmlDiffer.isEqual(expectedHtml, actualHtml)) {
+                assert.ok(expectedHtml);
+                done();
+            } else {
+                ${ saveHtml } && console.log('Result html is written to %j', htmlPath);
+                assert.fail(actualHtml, expectedHtml, null, '\n');
+            }
+        }
     });
     <%
 
     });
     }); %>
 });
-
-function assertHtml(expectedHtml, actualHtml) {
-    htmlDiffer.isEqual(expectedHtml, actualHtml) ?
-        assert.ok(expectedHtml) :
-        assert.fail(actualHtml, expectedHtml, null, '\n');
-}
