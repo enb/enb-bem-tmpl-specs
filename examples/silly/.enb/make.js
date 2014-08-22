@@ -14,7 +14,6 @@ module.exports = function (config) {
             bh: {
                 tech: 'enb-bh/techs/bh-server',
                 options: {
-                    bhFile: '../../node_modules/bh/lib/bh.js',
                     jsAttrName: 'data-bem',
                     jsAttrScheme: 'json'
                 }
