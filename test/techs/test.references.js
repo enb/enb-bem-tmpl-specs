@@ -1,38 +1,38 @@
-var path = require('path');
-var FileSystem = require('enb/lib/test/mocks/test-file-system');
-var TestNode = require('enb/lib/test/mocks/test-node');
-var levelsTech = require('enb/techs/levels');
-var depsTech = require('enb/techs/deps');
-var filesTech = require('enb/techs/files');
-var referencesTech = require('../../lib/techs/references');
+var path = require('path'),
+    FileSystem = require('enb/lib/test/mocks/test-file-system'),
+    TestNode = require('enb/lib/test/mocks/test-node'),
+    levelsTech = require('enb/techs/levels'),
+    depsTech = require('enb/techs/deps'),
+    filesTech = require('enb/techs/files'),
+    referencesTech = require('../../lib/techs/references');
 
 describe('techs', function () {
     describe('references', function () {
-        var fileSystem;
-        var bundles = {};
-        var levels = {};
-        var levelSchemes = [
-            levelScheme('empty', []),
-            levelScheme('only-bemjson', [{ file: '?.bemjson.js', content: '({ block: \'one\' })' }]),
-            levelScheme('only-html', [{ file: '?.html', content: '<html>one</html>' }]),
-            levelScheme('fully', [
-                { file: '?.bemjson.js', content: '({ block: \'fully\' })' },
-                { file: '?.html', content: '<html>fully</html>' }
-            ])
-        ];
-        var overrideLevelSchemes = [
-            levelScheme('override-bemjson', [{ file: 'only-bemjson.bemjson.js', content: '({ block: \'two\' })' }],
-                'only-bemjson'),
-            levelScheme('override-html', [{ file: 'only-html.html', content: '<html>two</html>' }], 'only-html')
-        ];
-        var bundleSchemes = [
-            bundleScheme('empty'),
-            bundleScheme('only-bemjson'),
-            bundleScheme('only-html'),
-            bundleScheme('override-bemjson', 'only-bemjson'),
-            bundleScheme('override-html', 'only-html'),
-            bundleScheme('fully')
-        ];
+        var fileSystem,
+            bundles = {},
+            levels = {},
+            levelSchemes = [
+                levelScheme('empty', []),
+                levelScheme('only-bemjson', [{ file: '?.bemjson.js', content: '({ block: \'one\' })' }]),
+                levelScheme('only-html', [{ file: '?.html', content: '<html>one</html>' }]),
+                levelScheme('fully', [
+                    { file: '?.bemjson.js', content: '({ block: \'fully\' })' },
+                    { file: '?.html', content: '<html>fully</html>' }
+                ])
+            ],
+            overrideLevelSchemes = [
+                levelScheme('override-bemjson', [{ file: 'only-bemjson.bemjson.js', content: '({ block: \'two\' })' }],
+                    'only-bemjson'),
+                levelScheme('override-html', [{ file: 'only-html.html', content: '<html>two</html>' }], 'only-html')
+            ],
+            bundleSchemes = [
+                bundleScheme('empty'),
+                bundleScheme('only-bemjson'),
+                bundleScheme('only-html'),
+                bundleScheme('override-bemjson', 'only-bemjson'),
+                bundleScheme('override-html', 'only-html'),
+                bundleScheme('fully')
+            ];
 
         beforeEach(function () {
             fileSystem = new FileSystem([].concat(levelSchemes, overrideLevelSchemes, bundleSchemes));
@@ -120,7 +120,7 @@ describe('techs', function () {
             runBaseTechs('fully')
                 .spread(function (res) {
                     res.must.be.eql({
-                        'fully': {
+                        fully: {
                             bemjson: { block: 'fully' },
                             html: '<html>fully</html>'
                         }
@@ -144,8 +144,8 @@ describe('techs', function () {
                     return bundle.runTechAndGetResults(filesTech);
                 })
                 .then(function (res) {
-                    var dirsTarget = name + '.bundle.dirs';
-                    var dirs = res[dirsTarget];
+                    var dirsTarget = name + '.bundle.dirs',
+                        dirs = res[dirsTarget];
 
                     bundle.provideTechData('?.dirs', dirs);
 

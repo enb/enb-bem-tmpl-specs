@@ -1,14 +1,14 @@
-var fs = require('fs');
-var path = require('path');
-var assert = require('assert');
-var dropRequireCache = require('enb/lib/fs/drop-require-cache');
-var HtmlDiffer = require('${ htmlDifferFilename }').HtmlDiffer;
-var htmlDiffer = new HtmlDiffer({ bem: true });
+var fs = require('fs'),
+    path = require('path'),
+    assert = require('assert'),
+    dropRequireCache = require('enb/lib/fs/drop-require-cache'),
+    HtmlDiffer = require('${ htmlDifferFilename }').HtmlDiffer,
+    htmlDiffer = new HtmlDiffer({ bem: true }),
 <% _.forEach(engines, function(engine) {
-%>var ${ engine.varname } = require('${ engine.path }')${ engine.exportName };
+%>    ${ engine.varname } = require('${ engine.path }')${ engine.exportName },
 <%
-}); %>var referencesFilename = require.resolve('${ referencesFilename }');
-var references;
+}); %>    referencesFilename = require.resolve('${ referencesFilename }'),
+    references;
 
 describe('${ describe }', function() {
     beforeEach(function () {
@@ -20,11 +20,10 @@ describe('${ describe }', function() {
 
     %>
     it('should be equal `${ it }` by ${ engine.name }', function (done) {
-        var bemjson = references['${ it }'].bemjson;
-        var expectedHtml = references['${ it }'].html;
-        var actualHtml = ${ engine.varname }.apply(bemjson);
-
-        var htmlPath = '${ engine.filename }' + '.html';
+        var bemjson = references['${ it }'].bemjson,
+            expectedHtml = references['${ it }'].html,
+            actualHtml = ${ engine.varname }.apply(bemjson),
+            htmlPath = '${ engine.filename }' + '.html';
 
         if (${ saveHtml }) {
             fs.writeFile(htmlPath, actualHtml, compare);
