@@ -23,7 +23,7 @@ describe('${ describe }', function() {
         var bemjson = references['${ it }'].bemjson,
             expectedHtml = references['${ it }'].html,
             actualHtml = ${ engine.varname }.apply(bemjson),
-            htmlPath = '${ engine.filename }' + '.html';
+            htmlPath = path.join('${ nodeDirname }', '${ it }.${ engine.name }.html');
 
         if (${ saveHtml }) {
             fs.writeFile(htmlPath, actualHtml, compare);
