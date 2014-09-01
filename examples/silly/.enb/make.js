@@ -8,8 +8,11 @@ module.exports = function (config) {
 
     tmplSpecs.configure({
         destPath: 'tmpl-specs',
-        levels: getLevels(config),
-        sourceLevels: getSourceLevels(config),
+        levels: ['blocks'],
+        sourceLevels: [
+            { path: '../libs/bem-core/common.blocks', check: false },
+            { path: 'blocks', check: true }
+        ],
         engines: {
             bh: {
                 tech: 'enb-bh/techs/bh-server',
@@ -29,20 +32,3 @@ module.exports = function (config) {
         }
     });
 };
-
-function getLevels (config) {
-    return [
-        'blocks'
-    ].map(function (level) {
-        return config.resolvePath(level);
-    });
-}
-
-function getSourceLevels (config) {
-    return [
-        { path: '../libs/bem-core/common.blocks', check: false },
-        'blocks'
-    ].map(function (level) {
-        return config.resolvePath(level);
-    });
-}
