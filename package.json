@@ -1,7 +1,7 @@
 {
   "author": "Andrew Abramov <andrewblond@yandex.com>",
   "name": "enb-bem-tmpl-specs",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "BEM template specs for ENB",
   "repository": "git://github.com/enb-bem/enb-bem-tmpl-specs",
   "homepage": "https://github.com/enb-bem/enb-bem-tmpl-specs",
