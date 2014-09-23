@@ -3,8 +3,8 @@ enb-bem-tmpl-specs
 
 [![NPM version](http://img.shields.io/npm/v/enb-bem-tmpl-specs.svg?style=flat)](http://npmjs.org/package/enb-bem-tmpl-specs) [![Build Status](http://img.shields.io/travis/enb-bem/enb-bem-tmpl-specs/master.svg?style=flat)](https://travis-ci.org/enb-bem/enb-bem-tmpl-specs) [![Dependency Status](http://img.shields.io/david/enb-bem/enb-bem-tmpl-specs.svg?style=flat)](https://david-dm.org/enb-bem/enb-bem-tmpl-specs)
 
-Инструмент для сборки и запуска спеков на шаблоны. В процессе сборки генерируются
-уровни-сеты из бандлов со спеками на шаблоны БЭМ-блоков с помощью [ENB](http://enb-make.info/).
+Инструмент для сборки и запуска спеков на шаблоны. В процессе сборки генерируются сеты из бандлов со спеками
+на шаблоны БЭМ-блоков с помощью [ENB](http://enb-make.info/).
 
 Установка:
 ----------
@@ -22,7 +22,7 @@ $ npm install --save-dev enb-bem-tmpl-specs
 
 Каждый тест состоит из пары файлов в технологиях BEMJSON и HTML. Таких пар файлов у блока может быть несколько. Имена файлов произвольные, но они (не включая расширения) для каждого теста должны совпадать. Например, **10-default**.bemjson.js и **10-default**.html.
 
-В BEMJSON-файле находится пример для БЭМ-сущности, в HTML – эталонный HTML-код, который должен получиться после применения шаблона блока к BEMJSON-у примера.
+В BEMJSON-файле находится пример для БЭМ-сущности, в HTML – эталонный HTML-код, который должен получиться после выполнения шаблонов с данным BEMJSON.
 
 ```sh
 $ tree -a <level>.blocks/<block-name>/<block-name>.tmpl-specs
@@ -59,11 +59,6 @@ $ tree -a <set-name>.examples
 * BEMHTML на основе [`xjst`](https://github.com/veged/xjst), базовые шаблоны находятся в [`bem-bl`](https://github.com/bem/bem-bl).
 * BEMHTML на основе [`bem-xjst`](https://github.com/bem-/bem-xjst), базовые шаблоны находятся в [`bem-core`](https://github.com/bem/bem-bl).
 * [`BH`](https://github.com/bem/bh).
-
-Поддержка нескольких режимов
-----------------------------
-
-
 
 Запуск спеков
 -------------
