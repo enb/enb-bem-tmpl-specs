@@ -3,10 +3,9 @@ enb-bem-tmpl-specs
 
 [![NPM version](http://img.shields.io/npm/v/enb-bem-tmpl-specs.svg?style=flat)](http://npmjs.org/package/enb-bem-tmpl-specs) [![Build Status](http://img.shields.io/travis/enb-bem/enb-bem-tmpl-specs/master.svg?style=flat)](https://travis-ci.org/enb-bem/enb-bem-tmpl-specs) [![Dependency Status](http://img.shields.io/david/enb-bem/enb-bem-tmpl-specs.svg?style=flat)](https://david-dm.org/enb-bem/enb-bem-tmpl-specs)
 
-Инструмент для сборки и запуска тестов на шаблоны. В процессе сборки генерируются сеты из бандлов с тестами
-на шаблоны БЭМ-блоков с помощью [ENB](http://enb-make.info/).
+Инструмент для сборки и запуска тестов на шаблоны. В процессе сборки генерируются сеты из бандлов с тестами на шаблоны БЭМ-блоков с помощью [ENB](http://enb-make.info/).
 
-Установка:
+Установка
 ----------
 
 ```sh
@@ -56,17 +55,16 @@ $ tree -a <set-name>.examples
 Поддержка шаблонизаторов
 ------------------------
 
-* BEMHTML на основе [`xjst`](https://github.com/veged/xjst), базовые шаблоны находятся в [`bem-bl`](https://github.com/bem/bem-bl).
-* BEMHTML на основе [`bem-xjst`](https://github.com/bem-/bem-xjst), базовые шаблоны находятся в [`bem-core`](https://github.com/bem/bem-bl).
-* [`BH`](https://github.com/bem/bh).
+* BEMHTML на основе [XJST](http://bem.info/tools/templating-engines/xjst/). Базовые шаблоны находятся в [bem-bl](http://ru.bem.info/libs/bem-bl/dev/).
+* BEMHTML на основе [BEM-XJST](http://ru.bem.info/tools/templating-engines/bemxjst/). Базовые шаблоны находятся в [bem-core](http://ru.bem.info/libs/bem-core/current/).
+* [BH](http://ru.bem.info/bh/).
 
 Запуск тестов
 -------------
 
 После сборки уровней-сетов произойдёт запуск тестов на шаблоны для указанных БЭМ-сущностей.
 
-Собранные `tmpl-spec.js`-файлы для каждой БЭМ-сущности подключают необходимые для выполнения шаблоны
-и наборы эталонов, а так же содержат код тестов в BDD-стиле. Эти файлы подаются на вход для [`mocha`](https://github.com/visionmedia/mocha).
+Собранные `tmpl-spec.js`-файлы для каждой БЭМ-сущности подключают необходимые для выполнения шаблоны и наборы эталонов, а так же содержат код тестов в BDD-стиле. Эти файлы подаются на вход для [mocha](https://github.com/visionmedia/mocha).
 
 ![2014-09-22 12 50 05](https://cloud.githubusercontent.com/assets/2225579/4353599/5f4a146c-4235-11e4-9ed2-410405df62bd.png)
 
@@ -77,24 +75,22 @@ $ tree -a <set-name>.examples
 
 ![2014-09-22 13 01 29](https://cloud.githubusercontent.com/assets/2225579/4353728/ecaa52da-4236-11e4-84f1-d7cfc623cff7.png)
 
-Для вывода различий используется [`html-differ`](https://github.com/bem/html-differ).
+Для вывода различий используется [html-differ](http://ru.bem.info/tools/testing/html-differ/).
 
 Как использовать?
 -----------------
 
-В `make`-файле (`.enb/make.js`) нужно подключить `enb-bem-tmpl-specs` модуль.
-С помощью этого модуля следует создать конфигуратор, указав название таска в рамках которого будет происходить сборка
-уровней сетов из тестов на шаблоны.
+В `make`-файле (`.enb/make.js`) нужно подключить модуль `enb-bem-tmpl-specs`.
+С помощью этого модуля следует создать конфигуратор, указав название таска, в рамках которого будет происходить сборка уровней сетов из тестов на шаблоны.
 
-Конфигуратор имеет единственный метод `configure`. Его можно вызывать несколько раз, чтобы задекларировать сборку
-нескольких уровней-сетов.
+Конфигуратор имеет единственный метод `configure`. Его можно вызывать несколько раз, чтобы задекларировать сборку нескольких уровней-сетов.
 
 ```js
 module.exports = function (config) {
     config.includeConfig('enb-bem-tmpl-specs'); // Подключаем `enb-bem-tmpl-specs` модуль.
 
     var examples = config.module('enb-bem-tmpl-specs') // Создаём конфигуратор сетов
-        .createConfigurator('tmpl-specs');             //  в рамках `specs` таска.
+        .createConfigurator('tmpl-specs');             //  в рамках таска `specs`.
 
     examples.configure({
         destPath: 'desktop.tmpl-specs',
@@ -126,11 +122,11 @@ module.exports = function (config) {
 
 ### Опции
 
-* *String* `destPath` &mdash;&nbsp;Путь относительный корня до&nbsp;нового уровня-сета с&nbsp;тестами на шаблоны, которые нужно собрать. Обязательная опция.
-* *String[] | Object[]* `levels` &mdash;&nbsp;Уровни, в&nbsp;которых следует искать эталоны. Обязательная опция.
-* *String[] | Object[]* `sourceLevels` &mdash;&nbsp;Уровни, в&nbsp;которых следует искать код шаблоноы, необходимый для шаблонизации эталонных BEMJSON-файлов.
-* *String[]* `referenceDirSuffixes` &mdash;&nbsp;Суффиксы папок-технологий с&nbsp;эталонами. По&nbsp;умолчанию&nbsp;&mdash;&nbsp;`['tmpl-specs']`.
-* *Object* `engines` &mdash;&nbsp; Опция определяет какие ENB-технологии следует использовать для сборки шаблонов. Обязательная опция.
+* *String* `destPath` &mdash;&nbsp;путь относительно корня до&nbsp;нового уровня-сета с&nbsp;тестами на шаблоны, которые нужно собрать. Обязательная опция.
+* *String[] | Object[]* `levels` &mdash;&nbsp;уровни, в&nbsp;которых следует искать эталоны. Обязательная опция.
+* *String[] | Object[]* `sourceLevels` &mdash;&nbsp;уровни, в&nbsp;которых следует искать код шаблонов, необходимый для шаблонизации эталонных BEMJSON-файлов.
+* *String[]* `referenceDirSuffixes` &mdash;&nbsp;суффиксы папок технологий с&nbsp;эталонами. По&nbsp;умолчанию&nbsp;&mdash;&nbsp;`['tmpl-specs']`.
+* *Object* `engines` &mdash;&nbsp; опция определяет какие ENB-технологии следует использовать для сборки шаблонов. Обязательная опция.
 
 Запуск из консоли
 -----------------
@@ -145,7 +141,7 @@ $ ./node_modules/.bin/enb make <task-name>
 
 ### Сборка и запуск всех тестов на шаблоны
 
-Если сборка уровней-сетов из тестов была задекларарована в `tmpl-specs`-таске:
+Если сборка уровней-сетов из тестов была задекларарована в таске `tmpl-specs`:
 
 ```sh
 $ ./node_modules/.bin/enb make tmpl-specs
