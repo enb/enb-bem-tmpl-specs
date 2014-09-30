@@ -109,11 +109,17 @@ module.exports = function (config) {
             },
             'bemhtml-dev': {
                 tech: 'enb-bemxjst/techs/bemhtml-old',
-                options: { devMode: true }
+                options: {
+                    exportName: 'BEMHTML',
+                    devMode: true
+                }
             },
             'bemhtml-prod': {
                 tech: 'enb-bemxjst/techs/bemhtml-old',
-                options: { devMode: false }
+                options: {
+                    exportName: 'BEMHTML',
+                    devMode: false
+                }
             }
         }
     });
