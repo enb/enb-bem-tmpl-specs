@@ -42,7 +42,8 @@
     "vow": "0.4.5",
     "inherit": "2.2.2",
     "mocha": "1.21.4",
-    "lodash": "2.4.1"
+    "lodash": "2.4.1",
+    "html": "0.0.7"
   },
   "devDependencies": {
     "enb-magic-factory": "0.2.x",

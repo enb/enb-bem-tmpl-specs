@@ -1,4 +1,5 @@
 var fs = require('fs'),
+    prettyPrint = require('${ prettyPrintFilename }').prettyPrint,
     path = require('path'),
     assert = require('assert'),
     dropRequireCache = require('enb/lib/fs/drop-require-cache'),
@@ -26,7 +27,7 @@ describe('${ describe }', function() {
             htmlPath = path.join('${ nodeDirname }', '${ it }.${ engine.name }.html');
 
         if (${ saveHtml }) {
-            fs.writeFile(htmlPath, actualHtml, compare);
+            fs.writeFile(htmlPath, prettyPrint(actualHtml), compare);
             return;
         }
 
