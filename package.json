@@ -6,10 +6,12 @@
   "repository": "git://github.com/enb-bem/enb-bem-tmpl-specs",
   "homepage": "https://github.com/enb-bem/enb-bem-tmpl-specs",
   "bugs": "https://github.com/enb-bem/enb-bem-tmpl-specs/issues",
-  "licenses": [{
-    "type": "MIT",
-    "url": "https://github.com/enb-bem/enb-bem-tmpl-specs/blob/master/LICENSE"
-  }],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/enb-bem/enb-bem-tmpl-specs/blob/master/LICENSE"
+    }
+  ],
   "contributors": [
     {
       "name": "Andrew Abramov",
@@ -39,12 +41,13 @@
     "enb-bem-techs": "0.1.0-beta12",
     "enb-bem-pseudo-levels": "0.2.3",
     "bem-naming": "0.3.0",
-    "html-differ": "1.0.2",
+    "html-differ": "1.0.3",
     "vow": "0.4.5",
     "inherit": "2.2.2",
     "mocha": "1.21.4",
     "lodash": "2.4.1",
-    "html": "0.0.7"
+    "html": "0.0.7",
+    "jade": "1.7.0"
   },
   "devDependencies": {
     "enb": ">= 0.13.0 < 1.0.0",

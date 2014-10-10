@@ -1,0 +1,45 @@
+mixin draw-test(test)
+  if(test.htmlDiff)
+    h2.test__title_type_failed
+      span= "[FAILED] "
+      span= test.title
+    .test__diff
+      - test.htmlDiff.forEach(function(part) {
+          - var color = 'gray';
+          - if(part.added) color = 'green';
+          - if(part.removed) color = 'red';
+          span(style="color:" + color)= part.value
+      - });
+  else
+    h2.test__title_type_passed
+      span= "[PASSED] "
+      span= test.title
+
+mixin draw-tests(tests)
+  - tests.forEach(function(test) {
+      .test
+        +draw-test(test)
+  - });
+
+mixin draw-suites(suites)
+  - Object.keys(suites).forEach(function(key) {
+      .suite
+        h1.suite__title= key
+        .tests
+          +draw-tests(suites[key])
+  - });
+
+doctype html
+html(lang="ru")
+  meta(charset="utf-8")
+  head
+    title tmpl-specs tests
+    style
+      include html.css
+  body
+    .status
+      span.status__passed [PASSED #{stats.passes}]
+      span.status__failed [FAILED #{stats.failures}]
+      span.status__skipped [SKIPPED #{stats.skipped}]
+    .suites
+      +draw-suites(data)
