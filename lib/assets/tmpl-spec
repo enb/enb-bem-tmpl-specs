@@ -4,7 +4,7 @@ var fs = require('fs'),
     assert = require('assert'),
     dropRequireCache = require('enb/lib/fs/drop-require-cache'),
     HtmlDiffer = require('${ htmlDifferFilename }').HtmlDiffer,
-    htmlDiffer = new HtmlDiffer({ bem: true }),
+    htmlDiffer = new HtmlDiffer('bem'),
 <% _.forEach(engines, function(engine) {
 %>    ${ engine.varname } = require('${ engine.path }')${ engine.exportName },
 <%
