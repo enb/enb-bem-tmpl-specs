@@ -1,0 +1,110 @@
+html, body
+{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.suites
+{
+    border: 1px solid #fff;
+}
+
+.suite
+{
+    padding: 10px;
+
+    border-bottom: 1px dashed #d8d8d8;
+    background: #f8f8f8;
+}
+
+.suite__title
+{
+    margin: 0;
+
+    font-family: Tahoma;
+    font-size: 22px;
+
+    color: #3a3a3a;
+}
+
+.tests
+{
+    padding: 10px;
+}
+
+.test
+{
+    border-bottom: 1px #solid #eee;
+}
+
+.test__title_type_failed,
+.test__title_type_passed
+{
+    margin: 0;
+
+    font-family: Tahoma;
+    font-size: 14px;
+
+    color: #777;
+}
+
+.test__title_type_failed span:nth-child(1)
+{
+    color: #ce3d3d;
+}
+
+.test__title_type_failed
+{
+    padding: 10px 0;
+}
+
+.test__title_type_passed span:nth-child(1)
+{
+    color: #87b16b;
+}
+
+.test__diff
+{
+    padding: 10px;
+
+    font-family: monospace;
+
+    border-radius: 3px;
+    background: #fff;
+}
+
+.status
+{
+    padding: 15px;
+
+    text-align: center;
+
+    font-family: Tahoma;
+    font-size: 16px;
+
+    color: #d3d3d3;
+    border-bottom: 1px dashed #d1d1d1;
+    background: #f5f4f4;
+}
+
+.status span
+{
+    margin-right: 5px;
+}
+
+.status__passed
+{
+    color: #8fcf4a;
+}
+
+.status__failed
+{
+    color: #f56348;
+}
+
+.status__skipped
+{
+    color: #5cc5e5;
+}
