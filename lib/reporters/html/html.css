@@ -69,10 +69,10 @@ html, body
 {
     padding: 10px;
 
-    font-family: monospace;
-
     border-radius: 3px;
     background: #fff;
+
+    line-height: 20px;
 }
 
 .status
@@ -81,8 +81,7 @@ html, body
 
     text-align: center;
 
-    font-family: Tahoma;
-    font-size: 16px;
+    font: 16px Tahoma;
 
     color: #d3d3d3;
     border-bottom: 1px dashed #d1d1d1;
@@ -96,7 +95,7 @@ html, body
 
 .status__passed
 {
-    color: #8fcf4a;
+    color: #6fb425;
 }
 
 .status__failed
@@ -106,5 +105,42 @@ html, body
 
 .status__skipped
 {
-    color: #5cc5e5;
+    color: #7e7f7f;
+}
+
+.history__actual,
+.history__expected
+{
+    padding: 0 3px 1px;
+
+    color: #fff;
+}
+
+.history__actual,
+.history__expected,
+.test__diff
+{
+    font: 14px/20px monospace;
+}
+
+.history__expected
+{
+    background: #e93b1b;
+}
+
+.history__actual
+{
+    background: #83bb45;
+}
+
+.history__normal
+{
+    color: gray;
+}
+
+.history
+{
+    padding: 10px 10px 0 10px;
+
+    color: black;
 }
