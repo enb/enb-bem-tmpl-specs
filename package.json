@@ -12,24 +12,6 @@
       "url": "https://github.com/enb-bem/enb-bem-tmpl-specs/blob/master/LICENSE"
     }
   ],
-  "contributors": [
-    {
-      "name": "Andrew Abramov",
-      "email": "andrewblond@yandex.com"
-    },
-    {
-      "name": "Evgeniy Gavryushin",
-      "email": "job.egabr@yandex.ru"
-    },
-    {
-      "name": "Vladimir Alaev",
-      "email": "scff@yandex-team.ru"
-    },
-    {
-      "name": "Vladimir Grinenko",
-      "email": "i@tadatuta.com"
-    }
-  ],
   "engines": {
     "node": ">= 0.10.0"
   },
