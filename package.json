@@ -28,7 +28,7 @@
     "inherit": "2.2.2",
     "mocha": "1.21.5",
     "lodash": "2.4.1",
-    "html": "0.0.7",
+    "js-beautify": "1.5.4",
     "jade": "1.7.0"
   },
   "devDependencies": {
