@@ -2,3 +2,4 @@ node_modules
 examples/libs
 examples/*/.enb/tmp
 examples/*/*tmpl-specs
+tmpl-specs-reports

@@ -1,7 +1,8 @@
 module.exports = {
     excludeFiles: [
         'node_modules',
-        'examples'
+        'examples',
+        'tmpl-specs-reports'
     ],
     requireSpaceAfterKeywords: ['if', 'else', 'for', 'while', 'do', 'switch', 'return', 'try', 'catch'],
     requireSpaceBeforeBlockStatements: true,
