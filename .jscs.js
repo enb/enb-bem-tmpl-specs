@@ -1,5 +1,6 @@
 module.exports = {
     excludeFiles: [
+        'lib/assets',
         'node_modules',
         'examples',
         'tmpl-specs-reports'

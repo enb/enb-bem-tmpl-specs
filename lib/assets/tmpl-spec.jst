@@ -1,0 +1,57 @@
+var assert = require('assert'),
+    path = require('path'),
+<% if (saveHtml) { %>
+    fs = require('fs'),
+    beautifyHtml = require('${ paths['js-beautify'] }').html,
+<% } %>
+    dropRequireCache = require('enb/lib/fs/drop-require-cache'),
+    HtmlDiffer = require('${ paths['html-differ'] }').HtmlDiffer,
+    htmlDiffer = new HtmlDiffer('bem'),
+
+    engines = {
+        <%_.forEach(engines, function(engine, i) {
+            var exportName = engine.exportName ? '.' + engine.exportName : '',
+                sep = i === engines.length - 1 ? '' : ',\n        ';
+
+            %>'${ engine.name }': require('./${ engine.target }')${ exportName }${ sep }<%
+        });%>
+    },
+    referencesFilename = require.resolve('./image.references.js'),
+    references;
+
+describe('${ describe }', function() {
+    beforeEach(function () {
+        dropRequireCache(require, referencesFilename);
+        references = require(referencesFilename);
+    });
+
+    <% _.forEach(its, function(it) {
+    %>describe('${ it }', function() {<%
+
+        _.forEach(engines, function(engine) {%>
+        it('should be equal `${ it }` by ${ engine.name }', function (<% if (saveHtml) { %>done<% } %>) {
+            var bemjson = references['${ it }'].bemjson,
+                expected = references['${ it }'].html,
+                actual = engines['${ engine.name }'].apply(bemjson);
+
+            assertHtml(actual, expected);<%
+            if (saveHtml) {
+                var filename = [it, engine.name, 'html'].join('.'),
+                    sep = '\n            ';
+
+                print(sep + 'fs.writeFile(path.join(__dirname, \'' + filename + '\'), beautifyHtml(actual), done);');
+            } %>
+        });<%
+        });
+
+    %>
+    }); <% }); %>
+});
+
+function assertHtml(actual, expected) {
+    if (htmlDiffer.isEqual(actual, expected)) {
+        assert.ok(actual);
+    } else {
+        assert.fail(actual, expected, null, '\n');
+    }
+}
