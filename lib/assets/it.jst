@@ -1,0 +1,13 @@
+it('should be equal `${ it }` by ${ engine.name }', function (<% if (saveHtml) { %>done<% } %>) {
+    var bemjson = references['${ it }'].bemjson,
+        expected = references['${ it }'].html,
+        actual = engines['${ engine.name }'].apply(bemjson);
+
+    assertHtml(actual, expected);<%
+    if (saveHtml) {
+        var filename = [it, engine.name, 'html'].join('.'),
+            sep = '\n            ';
+
+        print(sep + 'fs.writeFile(path.join(__dirname, \'' + filename + '\'), beautifyHtml(actual), done);');
+    } %>
+});

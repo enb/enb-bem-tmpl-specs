@@ -1,5 +1,5 @@
 ([{
-    mustDeps: { block: 'i-bem' }
+    mustDeps: { block: 'i-bem', elems: ['i18n'] }
 },
 {
     tech : 'tmpl-spec.js',
