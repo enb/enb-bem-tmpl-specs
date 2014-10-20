@@ -16,7 +16,7 @@ var assert = require('assert'),
             %>'${ engine.name }': require('./${ engine.target }')${ exportName }${ sep }<%
         });%>
     },
-    referencesFilename = require.resolve('./image.references.js'),
+    referencesFilename = require.resolve('${ paths.references }'),
     references;
 
 describe('${ describe }', function() {
