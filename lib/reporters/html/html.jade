@@ -5,10 +5,10 @@ mixin draw-test(test)
       span= test.title
     .test__diff
       - test.htmlDiff.forEach(function(part) {
-          - var color = 'gray';
-          - if(part.added) color = 'green';
-          - if(part.removed) color = 'red';
-          span(style="color:" + color)= part.value
+          - var cls = 'history__normal';
+          - if(part.added) cls = 'history__actual';
+          - if(part.removed) cls = 'history__expected';
+          span(class=cls)= part.value
       - });
   else
     h2.test__title_type_passed
@@ -25,8 +25,12 @@ mixin draw-suites(suites)
   - Object.keys(suites).forEach(function(key) {
       .suite
         h1.suite__title= key
+        if(suites[key].failed)
+          .history
+            span.history__actual ACTUAL
+            span.history__expected EXPECTED
         .tests
-          +draw-tests(suites[key])
+          +draw-tests(suites[key].tests)
   - });
 
 doctype html
