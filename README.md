@@ -165,6 +165,11 @@ module.exports = function (config) {
 * *String[] | Object[]* `sourceLevels` &mdash;&nbsp;уровни, в&nbsp;которых следует искать код шаблонов, необходимый для шаблонизации эталонных BEMJSON-файлов.
 * *String[]* `referenceDirSuffixes` &mdash;&nbsp;суффиксы папок технологий с&nbsp;эталонами. По&nbsp;умолчанию&nbsp;&mdash;&nbsp;`['tmpl-specs']`.
 * *Object* `engines` &mdash;&nbsp; опция определяет какие ENB-технологии следует использовать для сборки шаблонов. Обязательная опция.
+* Boolean `coverage` &mdash;&nbsp; включает генерацию отчета о покрытии кода шаблонов тестами. Код шаблонов должен
+был бы предварительно инструментирован при помощи [`istanbul`](https://github.com/gotwarlost/istanbul).
+* String[] `coverageVars` &mdash;&nbsp; имена переменных, в которые `istanbul` сохраняет данные о покрытии.
+* String[] `coverageReporters` &mdash;&nbsp; имена репортеров для отчета о покрытии. Также можно задать через
+переменную окружения `BEM_TMPL_SPECS_COV_REPORTERS`.
 
 Запуск из консоли
 -----------------
