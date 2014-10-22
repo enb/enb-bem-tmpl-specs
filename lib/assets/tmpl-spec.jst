@@ -4,6 +4,15 @@ var assert = require('assert'),
     fs = require('fs'),
     beautifyHtml = require('${ paths['js-beautify'] }').html,
 <% } %>
+    beautifyHtmlConfig = { unformatted: [
+    'a', 'span', 'img', 'address', 'script',
+    'h1', 'h2', 'h3', 'h4', 'h5','h6',
+    'dfn', 'code', 'samp', 'kbd', 'var',
+    'cite', 'abbr', 'acronym', 'strong',
+    'sub', 'sup', 'tt', 'big', 'small', 'strike',
+    'font', 'ins', 'del', 'pre', 'address', 'dt',
+    'q', 'i', 'b', 'u', 's', 'bdo', 'em'
+    ]},
     dropRequireCache = require('enb/lib/fs/drop-require-cache'),
     HtmlDiffer = require('${ paths['html-differ'] }').HtmlDiffer,
     htmlDiffer = new HtmlDiffer('bem'),
@@ -39,7 +48,7 @@ describe('${ describe }', function() {
                 var filename = [it, engine.name, 'html'].join('.'),
                     sep = '\n            ';
 
-                print(sep + 'fs.writeFile(path.join(__dirname, \'' + filename + '\'), beautifyHtml(actual), done);');
+                print(sep + 'fs.writeFile(path.join(__dirname, \'' + filename + '\'), beautifyHtml(actual, beautifyHtmlConfig), done);');
             } %>
         });<%
         });
