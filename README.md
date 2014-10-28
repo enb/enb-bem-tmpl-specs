@@ -192,3 +192,8 @@ $ ./node_modules/.bin/enb make tmpl-specs
 ```sh
 $ ./node_modules/.bin/enb make tmpl-specs desktop.tmpl-specs/block__elem
 ```
+
+Лицензия
+--------
+
+© 2014 YANDEX LLC. Код лицензирован [Mozilla Public License 2.0](LICENSE.txt).
