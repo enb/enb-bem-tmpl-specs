@@ -125,12 +125,12 @@ html, body
 
 .history__expected
 {
-    background: #e93b1b;
+    background: #83bb45;
 }
 
 .history__actual
 {
-    background: #83bb45;
+    background: #e93b1b;
 }
 
 .history__normal

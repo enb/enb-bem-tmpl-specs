@@ -6,8 +6,8 @@ mixin draw-test(test)
     .test__diff
       - test.htmlDiff.forEach(function(part) {
           - var cls = 'history__normal';
-          - if(part.added) cls = 'history__actual';
-          - if(part.removed) cls = 'history__expected';
+          - if(part.added) cls = 'history__expected';
+          - if(part.removed) cls = 'history__actual';
           span(class=cls)= part.value
       - });
   else
@@ -27,8 +27,8 @@ mixin draw-suites(suites)
         h1.suite__title= key
         if(suites[key].failed)
           .history
-            span.history__actual ACTUAL
             span.history__expected EXPECTED
+            span.history__actual ACTUAL
         .tests
           +draw-tests(suites[key].tests)
   - });
