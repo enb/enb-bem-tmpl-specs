@@ -22,7 +22,7 @@ var assert = require('assert'),
             var exportName = engine.exportName ? '.' + engine.exportName : '',
                 sep = i === engines.length - 1 ? '' : ',\n        ';
 
-            %>'${ engine.name }': require('./${ engine.target }')${ exportName }${ sep }<%
+        %>'${ engine.name }': (dropRequireCache(require, './${ engine.target }'),  require('./${ engine.target }')${ exportName })${ sep }<%
         });%>
     },
     referencesFilename = require.resolve('${ paths.references }'),
