@@ -13,10 +13,12 @@ module.exports = function (config) {
             { path: '../libs/bem-core/common.blocks', check: false },
             { path: 'blocks', check: true }
         ],
+        coverage: true,
         engines: {
             bh: {
-                tech: 'enb-bh/techs/bh-server',
+                tech: 'enb-bh/techs/bh-server-include',
                 options: {
+                    sourcemap: true,
                     jsAttrName: 'data-bem',
                     jsAttrScheme: 'json'
                 }
