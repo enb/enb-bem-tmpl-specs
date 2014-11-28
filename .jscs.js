@@ -3,6 +3,7 @@ module.exports = {
         'lib/assets',
         'node_modules',
         'examples',
+        'coverage',
         'tmpl-specs-reports'
     ],
     requireSpaceAfterKeywords: ['if', 'else', 'for', 'while', 'do', 'switch', 'return', 'try', 'catch'],
