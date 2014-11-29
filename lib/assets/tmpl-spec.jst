@@ -43,13 +43,15 @@ describe('${ describe }', function() {
                 expected = references['${ it }'].html,
                 actual = engines['${ engine.name }'].apply(bemjson);
 
-            assertHtml(actual, expected);<%
+            <%
             if (saveHtml) {
                 var filename = [it, engine.name, 'html'].join('.'),
                     sep = '\n            ';
 
-                print(sep + 'fs.writeFile(path.join(__dirname, \'' + filename + '\'), beautifyHtml(actual, beautifyHtmlConfig), done);');
-            } %>
+                print(sep + 'fs.writeFile(path.join(__dirname, \'' + filename + '\'), beautifyHtml(actual, beautifyHtmlConfig));');
+            }
+            %>
+            assertHtml(actual, expected);
         });<%
         });
 
