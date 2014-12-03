@@ -1,9 +1,9 @@
 var path = require('path'),
     FileSystem = require('enb/lib/test/mocks/test-file-system'),
     TestNode = require('enb/lib/test/mocks/test-node'),
-    levelsTech = require('enb/techs/levels'),
-    depsTech = require('enb/techs/deps'),
-    filesTech = require('enb/techs/files'),
+    levelsTech = require('enb-bem-techs/techs/levels'),
+    depsTech = require('enb-bem-techs/techs/deps'),
+    filesTech = require('enb-bem-techs/techs/files'),
     referencesTech = require('../../lib/techs/references');
 
 describe('techs', function () {
@@ -139,7 +139,7 @@ describe('techs', function () {
                     return bundle.runTechAndRequire(depsTech);
                 })
                 .spread(function (res) {
-                    bundle.provideTechData('?.deps.js', res.deps);
+                    bundle.provideTechData('?.deps.js', res);
 
                     return bundle.runTechAndGetResults(filesTech);
                 })
