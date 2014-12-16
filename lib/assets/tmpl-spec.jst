@@ -22,7 +22,20 @@ var assert = require('assert'),
             var exportName = engine.exportName ? '.' + engine.exportName : '',
                 sep = i === engines.length - 1 ? '' : ',\n        ';
 
-            %>'${ engine.name }': require('./${ engine.target }')${ exportName }${ sep }<%
+            if (langs.length) {
+                print('\'' + engine.name + '\': {\n            ');
+
+                _.forEach(langs, function(lang, i) {
+                    var sep = i === langs.length - 1 ? '' : ',\n            ',
+                        target = engine.target.replace('.js', '.' + lang + '.js');
+
+                    print('\'' + lang + '\': require(\'./' + target + '\')' + exportName + sep);
+                });
+
+                print('\n        }' + sep);
+            } else {
+                print('\'' + engine.name + '\': require(\'./' + engine.target + '\')' + exportName + sep);
+            }
         });%>
     },
     referencesFilename = require.resolve('${ paths.references }'),
@@ -34,27 +47,29 @@ describe('${ describe }', function() {
         references = require(referencesFilename);
     });
 
-    <% _.forEach(its, function(it) {
-    %>describe('${ it }', function() {<%
+<% _.forEach(its, function(it) { %>
+describe('${ it }', function() {
 
-        _.forEach(engines, function(engine) {%>
-        it('should be equal `${ it }` by ${ engine.name }', function (<% if (saveHtml) { %>done<% } %>) {
-            var bemjson = references['${ it }'].bemjson,
-                expected = references['${ it }'].html,
-                actual = engines['${ engine.name }'].apply(bemjson);
-
-            assertHtml(actual, expected);<%
-            if (saveHtml) {
-                var filename = [it, engine.name, 'html'].join('.'),
-                    sep = '\n            ';
-
-                print(sep + 'fs.writeFile(path.join(__dirname, \'' + filename + '\'), beautifyHtml(actual, beautifyHtmlConfig), done);');
-            } %>
-        });<%
+<% _.forEach(engines, function(engine) {
+    if (langs.length) {
+        _.forEach(langs, function(lang) {
+            print(template('it-i18n', {
+                it: it,
+                engine: engine,
+                lang: lang,
+                saveHtml: saveHtml
+            }));
         });
+    } else {
+        print(template('it', {
+            it: it,
+            engine: engine,
+            saveHtml: saveHtml
+        }));
+    }
+}); %>
 
-    %>
-    }); <% }); %>
+});<% }); %>
 });
 
 function assertHtml(actual, expected) {

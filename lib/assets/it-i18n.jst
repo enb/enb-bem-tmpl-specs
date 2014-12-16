@@ -1,0 +1,13 @@
+it('should be equal `${ it }` by ${ engine.name } in `${ lang }` lang', function (<% if (saveHtml) { %>done<% } %>) {
+    var bemjson = references['${ it }']['${ lang }'].bemjson,
+        expected = references['${ it }']['${ lang }'].html,
+        actual = engines['${ engine.name }']['${ lang }'].apply(bemjson);
+
+    assertHtml(actual, expected);<%
+    if (saveHtml) {
+        var filename = [it, engine.name.toLowerCase().replace(' ', '-'), lang, 'html'].join('.'),
+            sep = '\n            ';
+
+        print(sep + 'fs.writeFile(path.join(__dirname, \'' + filename + '\'), beautifyHtml(actual), done);');
+    } %>
+});

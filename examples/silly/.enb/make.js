@@ -9,13 +9,14 @@ module.exports = function (config) {
     tmplSpecs.configure({
         destPath: 'tmpl-specs',
         levels: ['blocks'],
+        langs: true,
         sourceLevels: [
             { path: '../libs/bem-core/common.blocks', check: false },
             { path: 'blocks', check: true }
         ],
         coverage: true,
         engines: {
-            bh: {
+            'BH': {
                 tech: 'enb-bh/techs/bh-server-include',
                 options: {
                     sourcemap: true,
@@ -23,11 +24,11 @@ module.exports = function (config) {
                     jsAttrScheme: 'json'
                 }
             },
-            'bemhtml-dev': {
+            'BEMHTML dev': {
                 tech: 'enb-bemxjst/techs/bemhtml-old',
                 options: { devMode: true }
             },
-            'bemhtml-prod': {
+            'BEMHTML prod': {
                 tech: 'enb-bemxjst/techs/bemhtml-old',
                 options: { devMode: false }
             }
