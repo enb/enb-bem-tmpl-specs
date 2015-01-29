@@ -16,35 +16,35 @@ var assert = require('assert'),
     dropRequireCache = require('enb/lib/fs/drop-require-cache'),
     HtmlDiffer = require('${ paths['html-differ'] }').HtmlDiffer,
     htmlDiffer = new HtmlDiffer('bem'),
-
-    engines = {
-        <%_.forEach(engines, function(engine, i) {
-            var exportName = engine.exportName ? '.' + engine.exportName : '',
-                sep = i === engines.length - 1 ? '' : ',\n        ';
-
-            if (langs.length) {
-                print('\'' + engine.name + '\': {\n            ');
-
-                _.forEach(langs, function(lang, i) {
-                    var sep = i === langs.length - 1 ? '' : ',\n            ',
-                        target = engine.target.replace('.js', '.' + lang + '.js');
-
-                    print('\'' + lang + '\': require(\'./' + target + '\')' + exportName + sep);
-                });
-
-                print('\n        }' + sep);
-            } else {
-                print('\'' + engine.name + '\': require(\'./' + engine.target + '\')' + exportName + sep);
-            }
-        });%>
-    },
     referencesFilename = require.resolve('${ paths.references }'),
+    engines,
     references;
 
 describe('${ describe }', function() {
     beforeEach(function () {
         dropRequireCache(require, referencesFilename);
         references = require(referencesFilename);
+
+        engines = {};
+        <% _.forEach(engines, function(engine) {
+            function reRequire(where, what) {
+                var name = what.name,
+                    target = what.target,
+                    exportName = what.exportName;
+                print('dropRequireCache(require, require.resolve(\'' + target + '\'));\n');
+                print(where + '[\'' + name + '\'] = require(\'' + target + '\')' + exportName + ';\n');
+            }
+
+            if (langs.length) {
+                var engineObject = 'engines[\'' + engine.name + '\']';
+                print(engineObject + ' = {};\n');
+                _.forEach(engine.langs, function(lang) {
+                    reRequire(engineObject, lang);
+                });
+            } else {
+                reRequire('engines', engine);
+            }
+        }); %>
     });
 
 <% _.forEach(its, function(it) { %>
