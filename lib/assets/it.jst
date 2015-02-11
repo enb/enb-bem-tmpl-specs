@@ -1,13 +1,50 @@
-it('should be equal `${ it }` by ${ engine.name }', function (<% if (saveHtml) { %>done<% } %>) {
-    var bemjson = references['${ it }'].bemjson,
-        expected = references['${ it }'].html,
-        actual = engines['${ engine.name }'].apply(bemjson);
+<%
+// prepares
+var titleSuffix = lang ? ' in `' + lang + '` lang' : '';
+var subreference = lang ? '[\'' + lang + '\']' : '';
+var prettifyEngineName = function (ngn) {
+    return lang ? String(ngn).toLowerCase().replace(' ', '-') + '.' + lang : ngn;
+};
+if (saveHtml) {
+    var filename = [it, prettifyEngineName(engine.name), 'html'].join('.');
+}
+%>
+it('should be equal `${ it }` by ${ engine.name }${ titleSuffix }', function (<% if (saveHtml || engine.async) { %>done<% } %>) {
+    var bemjson = references['${ it }']${ subreference }.bemjson,
+        expected = references['${ it }']${ subreference }.html;<%
+
+if (lang) { %>
+    lazies['${ engine.name }${ lang }']();
+<% }
+
+if (!engine.async) { %>
+    // sync mode
+    var actual = engines['${ engine.name }']${ subreference }.apply(bemjson);
 
     assertHtml(actual, expected);<%
-    if (saveHtml) {
-        var filename = [it, engine.name, 'html'].join('.'),
-            sep = '\n            ';
 
-        print(sep + 'fs.writeFile(path.join(__dirname, \'' + filename + '\'), beautifyHtml(actual), done);');
-    } %>
+if (saveHtml) { %>
+    saveHtmlFile('${ filename }', actual, done);
+<% }
+
+} else { // engine.async %>
+    // async mode
+    engines['${ engine.name }']${ subreference }.apply(bemjson, function(errs, actual) {
+        if (errs !== null) {
+            done(errs);
+            return;
+        }
+
+        assertHtml(actual, expected, function(err) {
+<% if (saveHtml) {%>
+            saveHtmlFile('${ filename }', actual, function() {
+                done(err || null);
+            });
+<% } else { %>
+            done(err || null);
+<% } %>
+        });
+    });<%
+} %>
+
 });

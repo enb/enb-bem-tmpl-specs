@@ -1,9 +1,21 @@
+<%
+function reRequire(where, what, lazy) {
+    var name = what.name,
+        target = what.target,
+        exportName = what.exportName;
+    lazy && print('lazies[\'' + lazy + '\'] = function () {\n');
+    print('dropRequireCache(require, require.resolve(\'' + target + '\'));\n');
+    print((lazy ? 'return ' : '') + where + '[\'' + name + '\'] = require(\'' + target + '\')' + exportName + ';\n');
+    lazy && print('};\n');
+}
+%>
 var assert = require('assert'),
     path = require('path'),
 <% if (saveHtml) { %>
     fs = require('fs'),
-    beautifyHtml = require('${ paths['js-beautify'] }').html,
-<% } %>
+    beautifyHtml = function(html) {
+        return require('${ paths['js-beautify'] }').html(html, beautifyHtmlConfig);
+    },
     beautifyHtmlConfig = { unformatted: [
     'a', 'span', 'img', 'address', 'script',
     'h1', 'h2', 'h3', 'h4', 'h5','h6',
@@ -13,11 +25,16 @@ var assert = require('assert'),
     'font', 'ins', 'del', 'pre', 'address', 'dt',
     'q', 'i', 'b', 'u', 's', 'bdo', 'em'
     ]},
+    saveHtmlFile = function(filename, actual, done) {
+        fs.writeFile(path.join(__dirname, filename), beautifyHtml(actual), done);
+    },
+<% } %>
     dropRequireCache = require('enb/lib/fs/drop-require-cache'),
     HtmlDiffer = require('${ paths['html-differ'] }').HtmlDiffer,
     htmlDiffer = new HtmlDiffer('bem'),
     referencesFilename = require.resolve('${ paths.references }'),
     engines,
+    lazies = {},
     references;
 
 describe('${ describe }', function() {
@@ -27,19 +44,11 @@ describe('${ describe }', function() {
 
         engines = {};
         <% _.forEach(engines, function(engine) {
-            function reRequire(where, what) {
-                var name = what.name,
-                    target = what.target,
-                    exportName = what.exportName;
-                print('dropRequireCache(require, require.resolve(\'' + target + '\'));\n');
-                print(where + '[\'' + name + '\'] = require(\'' + target + '\')' + exportName + ';\n');
-            }
-
-            if (langs.length) {
+            if (langs && langs.length) {
                 var engineObject = 'engines[\'' + engine.name + '\']';
                 print(engineObject + ' = {};\n');
                 _.forEach(engine.langs, function(lang) {
-                    reRequire(engineObject, lang);
+                    reRequire(engineObject, lang, engine.name + lang.name);
                 });
             } else {
                 reRequire('engines', engine);
@@ -51,9 +60,9 @@ describe('${ describe }', function() {
 describe('${ it }', function() {
 
 <% _.forEach(engines, function(engine) {
-    if (langs.length) {
+    if (langs && langs.length) {
         _.forEach(langs, function(lang) {
-            print(template('it-i18n', {
+            print(template('it', {
                 it: it,
                 engine: engine,
                 lang: lang,
@@ -64,6 +73,7 @@ describe('${ it }', function() {
         print(template('it', {
             it: it,
             engine: engine,
+            lang: null,
             saveHtml: saveHtml
         }));
     }
@@ -72,9 +82,10 @@ describe('${ it }', function() {
 });<% }); %>
 });
 
-function assertHtml(actual, expected) {
+function assertHtml(actual, expected, done) {
     if (htmlDiffer.isEqual(actual, expected)) {
         assert.ok(actual);
+        done && done(null);
     } else {
         assert.fail(actual, expected, null, '\n');
     }
