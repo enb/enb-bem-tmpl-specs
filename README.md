@@ -55,9 +55,9 @@ $ tree -a <set-name>.examples
 Поддержка шаблонизаторов
 ------------------------
 
-* BEMHTML на основе [XJST](http://bem.info/tools/templating-engines/xjst/). Базовые шаблоны находятся в [bem-bl](http://ru.bem.info/libs/bem-bl/dev/).
+* BEMHTML на основе [XJST](http://ru.bem.info/tools/templating-engines/xjst/). Базовые шаблоны находятся в [bem-bl](http://ru.bem.info/libs/bem-bl/dev/).
 * BEMHTML на основе [BEM-XJST](http://ru.bem.info/tools/templating-engines/bemxjst/). Базовые шаблоны находятся в [bem-core](http://ru.bem.info/libs/bem-core/current/).
-* [BH](http://ru.bem.info/bh/).
+* [BH](http://ru.bem.info/technology/bh/).
 
 Запуск тестов
 -------------
