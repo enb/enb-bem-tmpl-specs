@@ -1,14 +1,3 @@
-<%
-function reRequire(where, what, lazy) {
-    var name = what.name,
-        target = what.target,
-        exportName = what.exportName;
-    lazy && print('lazies[\'' + lazy + '\'] = function () {\n');
-    print('dropRequireCache(require, require.resolve(\'' + target + '\'));\n');
-    print((lazy ? 'return ' : '') + where + '[\'' + name + '\'] = require(\'' + target + '\')' + exportName + ';\n');
-    lazy && print('};\n');
-}
-%>
 var assert = require('assert'),
     path = require('path'),
 <% if (saveHtml) { %>
@@ -32,56 +21,92 @@ var assert = require('assert'),
     dropRequireCache = require('enb/lib/fs/drop-require-cache'),
     HtmlDiffer = require('${ paths['html-differ'] }').HtmlDiffer,
     htmlDiffer = new HtmlDiffer('bem'),
-    referencesFilename = require.resolve('${ paths.references }'),
-    engines,
-    lazies = {},
-    references;
+    referencesFilename = require.resolve('${ paths.references }');
 
 describe('${ describe }', function() {
+    var engines = {},
+        references;
+
     beforeEach(function () {
+        // reload references
         dropRequireCache(require, referencesFilename);
         references = require(referencesFilename);
+    });
 
+<% if (!(langs && langs.length)) { %>
+    //
+    // no langs mode
+    //
+
+    beforeEach(function () {
+        // reload engines artifacts
         engines = {};
         <% _.forEach(engines, function(engine) {
-            if (langs && langs.length) {
-                var engineObject = 'engines[\'' + engine.name + '\']';
-                print(engineObject + ' = {};\n');
-                _.forEach(engine.langs, function(lang) {
-                    reRequire(engineObject, lang, engine.name + lang.name);
-                });
-            } else {
-                reRequire('engines', engine);
-            }
+            reRequire('engines', engine);
         }); %>
     });
 
-<% _.forEach(its, function(it) { %>
-describe('${ it }', function() {
+    <% _.forEach(its, function(it) { %>
+    describe('${ it }', function() {
 
-<% _.forEach(engines, function(engine) {
-    if (langs && langs.length) {
-        _.forEach(langs, function(lang) {
+        <% _.forEach(engines, function(engine) {
             print(template('it', {
                 it: it,
                 engine: engine,
-                lang: lang,
+                lang: null,
                 saveHtml: saveHtml
             }));
+        }); %>
+
+    }); // describe ${ it }
+    <% }); // _.forEach its %>
+
+<% } else { // langs.length > 0 %>
+    //
+    // langs mode
+    //
+
+    <% _.forEach(langs, function (lang) { %>
+    describe('with lang `${ lang }`', function() {
+
+        beforeEach(function () {
+            <% _.forEach(engines, function(engine) {
+                var engineObject = 'engines[\'' + engine.name + '\']';
+                print(engineObject + ' = {};\n');
+                reRequire(engineObject, engine.langs.filter(function (_lang) { return lang === _lang.name; })[0]);
+            }); %>
         });
-    } else {
-        print(template('it', {
-            it: it,
-            engine: engine,
-            lang: null,
-            saveHtml: saveHtml
-        }));
-    }
-}); %>
 
-});<% }); %>
-});
+        <% _.forEach(its, function(it) { %>
+        describe('${ it }', function() {
 
+            <% _.forEach(engines, function(engine) {
+                print(template('it', {
+                    it: it,
+                    engine: engine,
+                    lang: lang,
+                    saveHtml: saveHtml
+                }));
+            }); %>
+
+        });
+        <% }); %>
+
+    });
+    <% }); %>
+
+<% }; // /if langs %>
+
+}); // /describe ${ describe }
+<%
+function reRequire(where, what) {
+    var name = what.name,
+        target = what.target,
+        exportName = what.exportName;
+    print('dropRequireCache(require, require.resolve(\'' + target + '\'));\n');
+    print(where + '[\'' + name + '\'] = require(\'' + target + '\')' + exportName + ';\n');
+}
+%>
 function assertHtml(actual, expected, done) {
     if (htmlDiffer.isEqual(actual, expected)) {
         assert.ok(actual);
