@@ -9,7 +9,7 @@ module.exports = function (config) {
     tmplSpecs.configure({
         destPath: 'tmpl-specs',
         levels: ['blocks'],
-        langs: true,
+        langs: ['en', 'ru'],
         sourceLevels: [
             { path: '../libs/bem-core/common.blocks', check: false },
             { path: '../blocks', check: true },
