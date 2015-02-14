@@ -55,9 +55,9 @@ $ tree -a <set-name>.examples
 Поддержка шаблонизаторов
 ------------------------
 
-* BEMHTML на основе [XJST](http://ru.bem.info/tools/templating-engines/xjst/). Базовые шаблоны находятся в [bem-bl](http://ru.bem.info/libs/bem-bl/dev/).
-* BEMHTML на основе [BEM-XJST](http://ru.bem.info/tools/templating-engines/bemxjst/). Базовые шаблоны находятся в [bem-core](http://ru.bem.info/libs/bem-core/current/).
-* [BH](http://ru.bem.info/technology/bh/).
+* BEMHTML на основе [XJST](https://ru.bem.info/tools/templating-engines/xjst/). Базовые шаблоны находятся в [bem-bl](https://ru.bem.info/libs/bem-bl/dev/).
+* BEMHTML на основе [BEM-XJST](https://ru.bem.info/tools/templating-engines/bemxjst/). Базовые шаблоны находятся в [bem-core](https://ru.bem.info/libs/bem-core/current/).
+* [BH](https://ru.bem.info/technology/bh/).
 
 Запуск тестов
 -------------
@@ -75,7 +75,7 @@ $ tree -a <set-name>.examples
 
 ![2014-09-22 13 01 29](https://cloud.githubusercontent.com/assets/2225579/4353728/ecaa52da-4236-11e4-84f1-d7cfc623cff7.png)
 
-Для вывода различий используется [html-differ](http://ru.bem.info/tools/testing/html-differ/).
+Для вывода различий используется [html-differ](https://ru.bem.info/tools/testing/html-differ/).
 
 Формат вывода ошибок
 --------------------
