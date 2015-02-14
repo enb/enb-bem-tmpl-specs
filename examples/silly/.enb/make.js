@@ -1,22 +1,22 @@
-var path = require('path');
-var _ = require('lodash');
-
-var rootPath = path.join(__dirname, '..', '..', '..');
-var engines = {
-    bh: {
-        tech: 'enb-bh/techs/bh-server-include',
-        options: { sourcemap: true, jsAttrName: 'data-bem', jsAttrScheme: 'json' }
-    },
-    bemhtml: {
-        tech: 'enb-bemxjst/techs/bemhtml-old',
-        options: { devMode: true }
-    }
-};
+var path = require('path'),
+    _ = require('lodash'),
+    rootPath = path.join(__dirname, '..', '..', '..'),
+    engines = {
+        bh: {
+            tech: 'enb-bh/techs/bh-server-include',
+            options: { sourcemap: true, jsAttrName: 'data-bem', jsAttrScheme: 'json' }
+        },
+        bemhtml: {
+            tech: 'enb-bemxjst/techs/bemhtml-old',
+            options: { devMode: true }
+        }
+    };
 
 module.exports = function (config) {
     config.includeConfig(rootPath);
 
-    var tmplSpecsModule = config.module('enb-bem-tmpl-specs');
+    var module = config.module('enb-bem-tmpl-specs'),
+        helper = module.createConfigurator('tmpl-specs');
 
     declareSpec('no lang', {
         langs: false,
@@ -54,11 +54,10 @@ module.exports = function (config) {
     // helper
     function declareSpec(name, opts) {
         var destPath = name.replace(/[^\w\d]+/ig, '-') + '.tmpl-specs'; // sluggified
-        var tmplSpecs = tmplSpecsModule.createConfigurator(destPath);
 
         opts.destPath = destPath;
 
-        tmplSpecs.configure(_.assign({}, {
+        helper.configure(_.assign({}, {
             engines: {
                 'BH': engines.bh,
                 'BEMHTML dev': engines.bemhtml,
@@ -69,10 +68,10 @@ module.exports = function (config) {
                 'common.blocks'
             ],
             // sourceLevels for block sources
-            sourceLevels: [
+            sourceLevels: [].concat(opts.levels || 'common.blocks', [
                 '../libs/bem-core/common.blocks',
                 '../blocks'
-            ]
+            ])
         }, opts));
     }
 
