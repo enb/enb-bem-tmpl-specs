@@ -1,6 +1,25 @@
 История изменений
 =================
 
+0.7.0
+-----
+
+### Крупные изменения
+
+* Добавлена поддержка асинхронных шаблонизаторов (@zqfox [#41]).
+* Добавлена [возможность фильтровать](https://github.com/enb-bem/enb-bem-tmpl-specs#Фильтрация-тестов) запускаемые тесты с помощью опции `grep` или переменной окружения `BEM_TMPL_SPECS_GREP` (@zqfox [#61]).
+
+### Исправления ошибок
+
+* Исправлена ошибка, из-за которой добавлялся код, имитирующий `BEM.I18N`, при `langs: false`.
+* Исправлена ошибка сборки шаблонизаторов с учётом локализации при `coverage: false`.
+* Исправлена ошибка, из-за которой не запускалась сборка шаблонизаторов, необходимых для выполнения тестов, если целью сборки был только таргет `?.tmpl-spec.js`.
+* Исправлено кэширование для сборки таргета `?.tmpl-spec.js`: пересборка будет происходить только по необходимости.
+
+### Остальное
+
+* Модуль `lodash@3.1.0` обновлён до версии `3.2.0`.
+
 0.6.4
 -----
 
@@ -94,10 +113,12 @@
 
 * Добавлены `summary` и `html` отчёты.
 
+[#61]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/61
 [#52]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/52
 [#50]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/50
 [#49]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/49
 [#47]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/47
+[#41]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/41
 [#39]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/39
 [#36]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/36
 [#31]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/31
