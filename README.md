@@ -87,6 +87,25 @@ $ tree -a <set-name>.examples
 BEM_TMPL_SPECS_REPORTERS=html,summary,spec
 ```
 
+Сохранение результатов
+----------------------
+
+Для сохранения результатов отрисовки HTML вы можете либо выставить явно флаг `saveHtml` при конфигурации технологии, либо через переменную окружения:
+```sh
+BEM_TMPL_SPECS_SAVE_HTML=1
+```
+Результаты сохраняются только при успешном завершении тестов.
+
+Фильтрация тестов
+-----------------
+
+Чтобы запустить только нужные тесты можно указать в `grep` регулярное выражение или строку, фильтрующее тесты по названию,
+либо передать его через переменную окружения:
+```sh
+BEM_TMPL_SPECS_GREP='10-'
+BEM_TMPL_SPECS_GREP='/specs.+rocks/i'
+```
+
 #### Доступные форматы отчетов
 
 Все генерируемые в файл отчеты сохранятся в директорию - `tmpl-specs-reports/`
@@ -165,6 +184,11 @@ module.exports = function (config) {
 * *String[] | Object[]* `sourceLevels` &mdash;&nbsp;уровни, в&nbsp;которых следует искать код шаблонов, необходимый для шаблонизации эталонных BEMJSON-файлов.
 * *String[]* `referenceDirSuffixes` &mdash;&nbsp;суффиксы папок технологий с&nbsp;эталонами. По&nbsp;умолчанию&nbsp;&mdash;&nbsp;`['tmpl-specs']`.
 * *Object* `engines` &mdash;&nbsp; опция определяет какие ENB-технологии следует использовать для сборки шаблонов. Обязательная опция.
+  - *String* `tech` — путь к ENB-технологии;
+  - *Object* `options` — опции для ENB-технологии;
+  - *Boolean* `async` — асинхронный шаблонизатор;
+* *Boolean* `saveHtml` — сохранять результат html при успешной отрисовке в файл (env: `BEM_TMPL_SPECT_SAVE_HTML`);
+* *String|RegExp* `grep` — фильтр тестов по названию (env: `BEM_TMPL_SPECS_GREP`), см. [mocha#grep](http://mochajs.org/#grep-option).
 
 Запуск из консоли
 -----------------
