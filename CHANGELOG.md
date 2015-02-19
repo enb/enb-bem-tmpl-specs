@@ -1,6 +1,13 @@
 История изменений
 =================
 
+0.8.0
+-----
+
+* Добавлена возможность задавать дополнительный уровень переопределения для теста ([#70]).
+* Исправлена ошибка, из-за которой тесты блока запускались в тестах его элементов и модификаторов ([#68]).
+* Модуль `istanbul@0.3.5` обновлён до версии `0.3.6`.
+
 0.7.0
 -----
 
@@ -113,6 +120,8 @@
 
 * Добавлены `summary` и `html` отчёты.
 
+[#70]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/70
+[#68]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/68
 [#61]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/61
 [#52]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/52
 [#50]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/50
