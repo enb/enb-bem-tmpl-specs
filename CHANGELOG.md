@@ -1,6 +1,13 @@
 История изменений
 =================
 
+0.10.0
+------
+
+* Добавлена опция `htmlDiffer`: позволяет переопределять настройки для сравнения HTML ([#54]).
+* Модуль `html-differ@1.1.0` обновлён до версии `1.3.0`: Исправлена ошибка при обработке [масок](https://github.com/bem/html-differ/blob/master/README.ru.md#Маски) в HTML.
+* Модуль `lodash@3.2.0` обновлён до версии `3.3.0`.
+
 0.9.0
 -----
 
@@ -128,6 +135,7 @@
 [#70]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/70
 [#68]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/68
 [#61]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/61
+[#54]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/54
 [#52]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/52
 [#50]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/50
 [#49]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/49
