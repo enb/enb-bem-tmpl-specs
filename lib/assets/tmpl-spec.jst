@@ -20,7 +20,7 @@ var assert = require('assert'),
 <% } %>
     dropRequireCache = require('enb/lib/fs/drop-require-cache'),
     HtmlDiffer = require('${ paths['html-differ'] }').HtmlDiffer,
-    htmlDiffer = new HtmlDiffer('bem'),
+    htmlDiffer = new HtmlDiffer(${ JSON.stringify(diffOpts) }),
     referencesFilename = require.resolve('${ paths.references }');
 
 describe('${ describe }', function() {
