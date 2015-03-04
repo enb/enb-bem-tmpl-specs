@@ -17,11 +17,11 @@ if (!engine.async) { %>
     // sync mode
     var actual = engines['${ engine.name }']${ subreference }.apply(bemjson);
 
-    assertHtml(actual, expected);<%
+    <% if (saveHtml) { %>
+        saveHtmlFile('${ filename }', actual, done);
+    <% }
 
-if (saveHtml) { %>
-    saveHtmlFile('${ filename }', actual, done);
-<% }
+    assertHtml(actual, expected);
 
 } else { // engine.async %>
     // async mode
