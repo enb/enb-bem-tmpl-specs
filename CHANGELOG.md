@@ -14,7 +14,7 @@
 
 ### Остальное
 
-* Модуль `js-beautify@1.5.4` обновлён до версии `1.5.5`: улучшено форматирование HTML (beautify-web/js-beautify#524)[https://github.com/beautify-web/js-beautify/issues/524].
+* Модуль `js-beautify@1.5.4` обновлён до версии `1.5.5`: улучшено форматирование HTML [beautify-web/js-beautify#524](https://github.com/beautify-web/js-beautify/issues/524).
 * Модуль `enb-bem-techs@1.0.3` обновлён до версии `1.0.4`.
 * Модуль `istanbul@0.3.6` обновлён до версии `0.3.7`.
 * Модуль `lodash@3.3.0` обновлён до версии `3.5.0`.
