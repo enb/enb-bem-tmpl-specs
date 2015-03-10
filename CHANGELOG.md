@@ -1,6 +1,26 @@
 История изменений
 =================
 
+0.11.0
+------
+
+### Крупные изменения
+
+Добавлена поддержка коментариев `/ istanbul ignore next */` для игнорирования участков кода при подсчёте покрытия тестами ([#73]).
+
+### Исправления ошибок
+
+* Исправлена ошибка, из-за которой не переопределялись эталоны ([#74]).
+
+### Остальное
+
+* Модуль `js-beautify@1.5.4` обновлён до версии `1.5.5`: улучшено форматирование HTML (beautify-web/js-beautify#524)[https://github.com/beautify-web/js-beautify/issues/524].
+* Модуль `enb-bem-techs@1.0.3` обновлён до версии `1.0.4`.
+* Модуль `istanbul@0.3.6` обновлён до версии `0.3.7`.
+* Модуль `lodash@3.3.0` обновлён до версии `3.5.0`.
+* Модуль `minimatch@2.0.1` обновлён до версии `2.0.3`.
+* Модуль `mocha@2.1.0` обновлён до версии `2.2.1`.
+
 0.10.0
 ------
 
@@ -132,6 +152,8 @@
 
 * Добавлены `summary` и `html` отчёты.
 
+[#74]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/74
+[#73]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/73
 [#70]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/70
 [#68]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/68
 [#61]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/61
