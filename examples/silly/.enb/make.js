@@ -68,10 +68,10 @@ module.exports = function (config) {
                 'common.blocks'
             ],
             // sourceLevels for block sources
-            sourceLevels: [].concat(opts.levels || 'common.blocks', [
+            sourceLevels: [].concat([
                 '../libs/bem-core/common.blocks',
                 '../blocks'
-            ])
+            ], opts.levels || 'common.blocks')
         }, opts));
     }
 
