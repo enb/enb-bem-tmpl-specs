@@ -40,7 +40,7 @@ $ tree -a <level>.blocks/<block-name>/<block-name>.tmpl-specs
 В результате будет построен уровень-сет из примеров, каждый из которых представляет собой обычный бандл (`nested`-уровень):
 
 ```sh
-$ tree -a <set-name>.examples
+$ tree -a <set-name>.tmpl-specs
 
 <set-name>.tmpl-specs/
  └── <block-name>/
