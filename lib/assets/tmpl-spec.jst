@@ -107,11 +107,18 @@ function reRequire(where, what) {
     print(where + '[\'' + name + '\'] = require(\'' + target + '\')' + exportName + ';\n');
 }
 %>
-function assertHtml(actual, expected, done) {
+function assertHtml(actual, expected, done, filename) {
+<% if (saveHtml) {%>
+    saveHtmlFile(filename, actual, function() {
+<% } %>
     if (htmlDiffer.isEqual(actual, expected)) {
         assert.ok(actual);
         done && done(null);
     } else {
-        assert.fail(actual, expected, null, '\n');
+
+            assert.fail(actual, expected, null, '\n');
     }
+<% if (saveHtml) {%>
+    });
+<% } %>
 }
