@@ -16,22 +16,22 @@ describe('techs', function () {
                 levelScheme('only-bemjson', [{ file: '?.bemjson.js', content: '({ block: \'one\' })' }]),
                 levelScheme('only-html', [{ file: '?.html', content: '<html>one</html>' }]),
                 levelScheme('fully', [
-                    { file: '?.bemjson.js', content: '({ block: \'fully\' })' },
-                    { file: '?.html', content: '<html>fully</html>' }
+                    { file: 'fully.bemjson.js', content: '({ block: \'fully\' })' },
+                    { file: 'fully.html', content: '<html>fully</html>' }
                 ])
             ],
             overrideLevelSchemes = [
-                levelScheme('override-bemjson', [{ file: 'only-bemjson.bemjson.js', content: '({ block: \'two\' })' }],
-                    'only-bemjson'),
-                levelScheme('override-html', [{ file: 'only-html.html', content: '<html>two</html>' }], 'only-html')
+                levelScheme('override-bemjson', [{ file: 'fully.bemjson.js', content: '({ block: \'two\' })' }],
+                    'fully'),
+                levelScheme('override-html', [{ file: 'fully.html', content: '<html>two</html>' }], 'fully')
             ],
             bundleSchemes = [
                 bundleScheme('empty'),
                 bundleScheme('only-bemjson'),
                 bundleScheme('only-html'),
-                bundleScheme('override-bemjson', 'only-bemjson'),
-                bundleScheme('override-html', 'only-html'),
-                bundleScheme('fully')
+                bundleScheme('fully'),
+                bundleScheme('override-bemjson', 'fully'),
+                bundleScheme('override-html', 'fully')
             ];
 
         beforeEach(function () {
@@ -43,10 +43,8 @@ describe('techs', function () {
             });
 
             overrideLevelSchemes.forEach(function (level) {
-                var oldLevel = level.directory.replace('override', 'only');
-
                 levels[level.directory] = [
-                    path.join(fileSystem._root, oldLevel),
+                    path.join(fileSystem._root, 'fully.blocks'),
                     path.join(fileSystem._root, level.directory)
                 ];
             });
@@ -68,47 +66,41 @@ describe('techs', function () {
                 .then(done, done);
         });
 
-        it('must provide bemjson reference', function (done) {
+        it('must ignore reference with only bemjson', function (done) {
             runBaseTechs('only-bemjson')
                 .spread(function (res) {
-                    res.must.be.eql({
-                        'only-bemjson': {
-                            bemjson: { block: 'one' }
-                        }
-                    });
+                    res.must.be.eql({});
                 })
                 .then(done, done);
         });
 
-        it('must provide html reference', function (done) {
+        it('must ignore reference with only html', function (done) {
             runBaseTechs('only-html')
                 .spread(function (res) {
-                    res.must.be.eql({
-                        'only-html': {
-                            html: '<html>one</html>'
-                        }
-                    });
+                    res.must.be.eql({});
                 })
                 .then(done, done);
         });
 
-        it('must provide bemjson references', function (done) {
+        it('must provide references with overridden bemjson', function (done) {
             runBaseTechs('override-bemjson')
                 .spread(function (res) {
                     res.must.be.eql({
-                        'only-bemjson': {
-                            bemjson: { block: 'two' }
+                        fully: {
+                            bemjson: { block: 'two' },
+                            html: '<html>fully</html>'
                         }
                     });
                 })
                 .then(done, done);
         });
 
-        it('must provide html references', function (done) {
+        it('must provide references with overridden html', function (done) {
             runBaseTechs('override-html')
                 .spread(function (res) {
                     res.must.be.eql({
-                        'only-html': {
+                        fully: {
+                            bemjson: { block: 'fully' },
                             html: '<html>two</html>'
                         }
                     });
