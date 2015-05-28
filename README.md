@@ -94,7 +94,6 @@ BEM_TMPL_SPECS_REPORTERS=html,summary,spec
 ```sh
 BEM_TMPL_SPECS_SAVE_HTML=1
 ```
-Результаты сохраняются только при успешном завершении тестов.
 
 Фильтрация тестов
 -----------------
