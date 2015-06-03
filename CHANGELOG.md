@@ -1,6 +1,13 @@
 История изменений
 =================
 
+0.11.2
+------
+
+### Исправления ошибок
+
+* Исправлено подключение дополнительных уровней для теста ([#87]).
+
 0.11.1
 ------
 
@@ -176,7 +183,6 @@
 
 * Добавлены `summary` и `html` отчёты.
 
-[#85]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/85
 [#83]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/83
 [#74]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/74
 [#73]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/73
@@ -184,11 +190,13 @@
 [#68]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/68
 [#61]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/61
 [#54]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/54
-[#52]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/52
 [#50]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/50
-[#49]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/49
 [#47]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/47
 [#41]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/41
-[#39]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/39
-[#36]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/36
-[#31]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/31
+[#87]: https://github.com/enb-bem/enb-bem-tmpl-specs/pull/87
+[#85]: https://github.com/enb-bem/enb-bem-tmpl-specs/pull/85
+[#52]: https://github.com/enb-bem/enb-bem-tmpl-specs/pull/52
+[#49]: https://github.com/enb-bem/enb-bem-tmpl-specs/pull/49
+[#39]: https://github.com/enb-bem/enb-bem-tmpl-specs/pull/39
+[#36]: https://github.com/enb-bem/enb-bem-tmpl-specs/pull/36
+[#31]: https://github.com/enb-bem/enb-bem-tmpl-specs/pull/31
