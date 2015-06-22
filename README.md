@@ -145,6 +145,7 @@ module.exports = function (config) {
     examples.configure({
         destPath: 'desktop.tmpl-specs',
         levels: ['blocks'],
+        langs: ['ru','en'],
         sourceLevels: [
             { path: '../libs/bem-core/common.blocks', check: false },
             { path: 'blocks', check: true }
@@ -182,6 +183,8 @@ module.exports = function (config) {
 * *String[] | Object[]* `levels` &mdash;&nbsp;уровни, в&nbsp;которых следует искать эталоны. Обязательная опция.
 * *String[] | Object[]* `sourceLevels` &mdash;&nbsp;уровни, в&nbsp;которых следует искать код шаблонов, необходимый для шаблонизации эталонных BEMJSON-файлов.
 * *String[]* `referenceDirSuffixes` &mdash;&nbsp;суффиксы папок технологий с&nbsp;эталонами. По&nbsp;умолчанию&nbsp;&mdash;&nbsp;`['tmpl-specs']`.
+* *String[] | Boolean* `langs` &mdash;&nbsp; использование `BEM.I18N` в шаблонах. Если указать массив языков, то необходимо будет создавать эталоны на каждый из перечисленных языков. Например `10-name.ru.bemjson.js` , `10-name.en.bemjson.js`.
+Если использовать значение `langs: true`, то эталоны по языкам писать не нужно. В код собранных шаблонов будет всталенно только ядро BEM.I18N, без кейсетов. По&nbsp;умолчанию&nbsp;&mdash;&nbsp;`false`.
 * *Object* `engines` &mdash;&nbsp; опция определяет какие ENB-технологии следует использовать для сборки шаблонов. Обязательная опция.
   - *String* `tech` — путь к ENB-технологии;
   - *Object* `options` — опции для ENB-технологии;
