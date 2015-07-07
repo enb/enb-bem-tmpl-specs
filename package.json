@@ -27,13 +27,13 @@
     "enb-source-map": "1.5.0",
     "html-differ": "1.3.1",
     "inherit": "2.2.2",
-    "istanbul": "0.3.14",
-    "jade": "1.10.0",
-    "js-beautify": "1.5.6",
-    "lodash": "3.9.3",
+    "istanbul": "0.3.17",
+    "jade": "1.11.0",
+    "js-beautify": "1.5.10",
+    "lodash": "3.10.0",
     "minimatch": "2.0.8",
     "mocha": "2.2.5",
-    "vow": "0.4.9",
+    "vow": "0.4.10",
     "vow-fs": "0.3.4"
   },
   "devDependencies": {
