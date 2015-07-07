@@ -1,6 +1,21 @@
 История изменений
 =================
 
+0.12.0
+------
+
+### Крупные изменения
+
+* Добавлена поддержка отчётов для `mocha` в переменную окружения `BEM_TMPL_SPECS_REPORTERS` ([#38]).
+
+### Зависимости
+
+* Модуль `istanbul@0.3.14` обновлён до версии `0.3.17`.
+* Модуль `jade@1.10.0` обновлён до версии `1.11.0`.
+* Модуль `js-beautify@1.5.6` обновлён до версии `1.5.10`.
+* Модуль `lodash@3.9.3` обновлён до версии `3.10.0`.
+* Модуль `vow@0.4.9` обновлён до версии `0.4.10`.
+
 0.11.2
 ------
 
@@ -198,5 +213,6 @@
 [#52]: https://github.com/enb-bem/enb-bem-tmpl-specs/pull/52
 [#49]: https://github.com/enb-bem/enb-bem-tmpl-specs/pull/49
 [#39]: https://github.com/enb-bem/enb-bem-tmpl-specs/pull/39
+[#38]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/38
 [#36]: https://github.com/enb-bem/enb-bem-tmpl-specs/pull/36
 [#31]: https://github.com/enb-bem/enb-bem-tmpl-specs/pull/31
