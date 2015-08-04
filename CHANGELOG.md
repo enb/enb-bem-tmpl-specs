@@ -1,6 +1,22 @@
 История изменений
 =================
 
+0.12.1
+------
+
+### Исправления ошибок
+
+* Исправлено завершение при использовании через `enb-magic-platform`: в случае ошибки модуль возвращает rejected promise, а не завершает работу через `process.exit(1)` ([#88]). Это необходимо для корректной работы в случаях, когда запущены несколько magic-тасков одновременно.
+* Исправлена ошибка, из-за которой тесты запускались из уровней, указанных в `sourceLevels` ([#93]).
+* Исправлена имитация `BEM.I18N` для работы с `BH@4.x` ([#94]).
+* Исправлен подсчёт покрытия тестами кода шаблонов, использующих интернацианализацию ([#98]).
+
+### Зависимости
+
+* Модуль `enb-bem-i18n@0.3.0` обновлён до версии `0.4.0`.
+* Модуль `lodash@3.10.0` обновлён до версии `3.10.1`.
+* Модуль `minimatch@2.0.8` обновлён до версии `2.0.10`.
+
 0.12.0
 ------
 
@@ -198,6 +214,10 @@
 
 * Добавлены `summary` и `html` отчёты.
 
+[#98]: https://github.com/enb-bem/enb-bem-tmpl-specs/pull/98
+[#94]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/94
+[#93]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/93
+[#88]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/88
 [#83]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/83
 [#74]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/74
 [#73]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/73
