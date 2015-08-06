@@ -1,6 +1,17 @@
 История изменений
 =================
 
+0.13.0
+------
+
+### Крупные изменения
+
+* Добавлена опция `depsTech` для выбора между технологиями `deps` и `deps-old` ([#103]).
+
+### Зависимости
+
+* Модуль `enb-source-map@1.5.0` обновлён до версии `1.6.0`.
+
 0.12.1
 ------
 
@@ -214,6 +225,7 @@
 
 * Добавлены `summary` и `html` отчёты.
 
+[#103]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/103
 [#98]: https://github.com/enb-bem/enb-bem-tmpl-specs/pull/98
 [#94]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/94
 [#93]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/93
