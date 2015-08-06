@@ -24,6 +24,13 @@ module.exports = function (config) {
         // levels: ['common.blocks'] by default
     });
 
+    declareSpec('custom deps', {
+        depsTech: 'deps',
+        langs: false,
+        coverage: false
+        // levels: ['common.blocks'] by default
+    });
+
     declareSpec('no lang with coverage', {
         langs: false,
         coverage: true
