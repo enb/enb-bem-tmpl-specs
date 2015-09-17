@@ -1,6 +1,21 @@
 История изменений
 =================
 
+0.14.0
+------
+
+### Крупные изменения
+
+* Добавлена поддержка `i18n` из `bem-core` ([#106]).
+
+### Зависимости
+
+* Модуль `enb-bem-i18n@0.4.0` обновлён до версии `1.0.0`.
+* Модуль `enb-bem-techs@1.0.4` обновлён до версии `2.0.1`.
+* Модуль `enb-source-map@1.7.1` обновлён до версии `1.8.0`.
+* Модуль `istanbul@0.3.17` обновлён до версии `0.3.20`.
+* Модуль `mocha@2.2.5` обновлён до версии `2.3.2`.
+
 0.13.2
 ------
 
@@ -235,6 +250,7 @@
 
 * Добавлены `summary` и `html` отчёты.
 
+[#106]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/106
 [#103]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/103
 [#98]: https://github.com/enb-bem/enb-bem-tmpl-specs/pull/98
 [#94]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/94
