@@ -1,7 +1,6 @@
 ([{
     mustDeps: [
-        { block: 'i-bem' },
-        { block: 'i18n' }
+        { block: 'i-bem' }
     ]
 },
 {

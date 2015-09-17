@@ -43,12 +43,14 @@ module.exports = function (config) {
 
     declareSpec('langs: true', {
         langs: true,
-        coverage: false
+        coverage: false,
+        levels: ['mock-i18n.blocks']
     });
 
     declareSpec('langs: true with coverage', {
         langs: true,
-        coverage: true
+        coverage: true,
+        levels: ['mock-i18n.blocks']
     });
 
     declareSpec('many langs', {

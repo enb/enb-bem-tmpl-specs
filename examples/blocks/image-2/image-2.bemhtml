@@ -7,7 +7,7 @@ block('image')(
             width : ctx.width,
             height : ctx.height,
             alt : ctx.alt,
-            title : BEM.I18N('image', 'title')
+            title : (typeof BEM !== 'undefined' && BEM.I18N) ? BEM.I18N('image', 'title') : 'title-value'
         };
     })
 );
