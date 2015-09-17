@@ -193,6 +193,7 @@ module.exports = function (config) {
 * *String|RegExp* `grep` — фильтр тестов по названию (env: `BEM_TMPL_SPECS_GREP`), см. [mocha#grep](http://mochajs.org/#grep-option).
 * *Object* `htmlDiffer` — настройки сравнения HTML при помощи [html-differ](https://ru.bem.info/tools/testing/html-differ/). По&nbsp;умолчанию&nbsp;&mdash;&nbsp;`{ preset: 'bem' }`.
 * *String|Function* `depsTech` — технология для раскрытия зависимостей. По умолчанию — `deps-old`.
+* *Function* `mockI18N` — функция будет использована вместо ядра `i18n`, если указана опция `langs: true`.
 
 Запуск из консоли
 -----------------
