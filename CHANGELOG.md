@@ -1,6 +1,18 @@
 История изменений
 =================
 
+0.15.0
+------
+
+### Крупные изменения
+
+* [ __*major*__ ] Унифицирована работа `i18n` для `bem-core` и `bem-bl` при `langs: true` ([#109]).
+* Добавлена опция `mockI18N`: позволяет подменить `i18n` ([#110]).
+
+### Исправления ошибок
+
+* Сборка c `langs: true` не завершается ошибкой, если у блока нет зависимости от `i18n` ([#108]).
+
 0.14.0
 ------
 
@@ -250,6 +262,9 @@
 
 * Добавлены `summary` и `html` отчёты.
 
+[#110]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/110
+[#109]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/109
+[#108]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/108
 [#106]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/106
 [#103]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/103
 [#98]: https://github.com/enb-bem/enb-bem-tmpl-specs/pull/98
