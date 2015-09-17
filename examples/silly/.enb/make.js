@@ -3,12 +3,17 @@ var path = require('path'),
     rootPath = path.join(__dirname, '..', '..', '..'),
     engines = {
         bh: {
-            tech: 'enb-bh/techs/bh-server-include',
-            options: { sourcemap: true, jsAttrName: 'data-bem', jsAttrScheme: 'json' }
+            tech: 'enb-bh/techs/bh-bundle',
+            options: {
+                sourcemap: true,
+                bhOptions: {
+                    jsAttrName: 'data-bem',
+                    jsAttrScheme: 'json'
+                }
+            }
         },
         bemhtml: {
-            tech: 'enb-bemxjst/techs/bemhtml-old',
-            options: { devMode: true }
+            tech: 'enb-bemxjst/techs/bemhtml'
         }
     };
 
@@ -40,7 +45,7 @@ module.exports = function (config) {
         langs: true,
         coverage: false
     });
-    
+
     declareSpec('langs: true with coverage', {
         langs: true,
         coverage: true
@@ -66,9 +71,11 @@ module.exports = function (config) {
 
         helper.configure(_.assign({}, {
             engines: {
-                'BH': engines.bh,
-                'BEMHTML dev': engines.bemhtml,
-                'BEMHTML prod': _.assign({}, engines.bemhtml, { options: { devMode: true }})
+                'BH': opts.langs ? _.assign({}, engines.bh, {
+                    options: { requires: { i18n: { globals: 'BEM.I18N' } } }
+                }) : engines.bh,
+                'BEMHTML dev': _.assign({}, engines.bemhtml, { options: { devMode: true } }),
+                'BEMHTML prod': _.assign({}, engines.bemhtml, { options: { devMode: false } })
             },
             // levels for specs
             levels: [

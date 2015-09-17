@@ -7,7 +7,7 @@ module.exports = function(bh) {
                 width : json.width,
                 height : json.height,
                 alt : json.alt,
-                title : bh.lib.i18n('image', 'title')
+                title : bh.lib.i18n ? bh.lib.i18n('image', 'title') : 'title'
             });
     });
 };
