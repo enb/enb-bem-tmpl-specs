@@ -40,7 +40,7 @@ module.exports = function (config) {
         langs: true,
         coverage: false
     });
-
+    
     declareSpec('langs: true with coverage', {
         langs: true,
         coverage: true
