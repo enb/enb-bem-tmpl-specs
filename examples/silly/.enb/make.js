@@ -47,6 +47,19 @@ module.exports = function (config) {
         levels: ['mock-i18n.blocks']
     });
 
+    declareSpec('langs: true with custom mock', {
+        langs: true,
+        coverage: false,
+        levels: ['custom-mock-i18n.blocks'],
+        mockI18N: function (global, bem_) {
+            global.BEM = bem_;
+
+            bem_.I18N = function (keyset, key) {
+                return keyset + '::' + key;
+            };
+        }
+    });
+
     declareSpec('langs: true with coverage', {
         langs: true,
         coverage: true,
