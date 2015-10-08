@@ -18,7 +18,7 @@ var assert = require('assert'),
         fs.writeFile(path.join(__dirname, filename), beautifyHtml(actual), done);
     },
 <% } %>
-    clearRequire = require('clear-require'),
+    clearRequire = require('${ paths['clear-require'] }'),
     HtmlDiffer = require('${ paths['html-differ'] }').HtmlDiffer,
     htmlDiffer = new HtmlDiffer(${ JSON.stringify(diffOpts) }),
     referencesFilename = require.resolve('${ paths.references }');
