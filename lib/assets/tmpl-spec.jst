@@ -18,7 +18,7 @@ var assert = require('assert'),
         fs.writeFile(path.join(__dirname, filename), beautifyHtml(actual), done);
     },
 <% } %>
-    dropRequireCache = require('enb/lib/fs/drop-require-cache'),
+    clearRequire = require('clear-require'),
     HtmlDiffer = require('${ paths['html-differ'] }').HtmlDiffer,
     htmlDiffer = new HtmlDiffer(${ JSON.stringify(diffOpts) }),
     referencesFilename = require.resolve('${ paths.references }');
@@ -29,7 +29,7 @@ describe('${ describe }', function() {
 
     beforeEach(function () {
         // reload references
-        dropRequireCache(require, referencesFilename);
+        clearRequire(referencesFilename);
         references = require(referencesFilename);
     });
 
@@ -103,7 +103,7 @@ function reRequire(where, what) {
     var name = what.name,
         target = what.target,
         exportName = what.exportName;
-    print('dropRequireCache(require, require.resolve(\'' + target + '\'));\n');
+    print('clearRequire(require.resolve(\'' + target + '\'));\n');
     print(where + '[\'' + name + '\'] = require(\'' + target + '\')' + exportName + ';\n');
 }
 %>
