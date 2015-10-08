@@ -1,6 +1,22 @@
 История изменений
 =================
 
+0.16.0
+------
+
+### Крупные изменения
+
+* Добавлена поддержка `enb` версии `1.x` ([#117]).
+
+### Зависимости
+
+* Модуль `enb-bem-i18n@1.0.1` обновлен до версии `1.1.0`.
+* Модуль `enb-bem-pseudo-levels@0.2.6` обновлен до версии `0.3.0`.
+* Модуль `enb-bem-techs@2.0.1` обновлен до версии `2.1.0`.
+* Модуль `istanbul@0.3.20` обновлен до версии `0.3.22`.
+* Модуль `mocha@2.3.2` обновлен до версии `2.3.3`.
+* Модуль `vow@0.4.10` обновлен до версии `0.4.11`.
+
 0.15.1
 ------
 
@@ -267,6 +283,7 @@
 
 * Добавлены `summary` и `html` отчёты.
 
+[#117]: https://github.com/enb-bem/enb-bem-tmpl-specs/pull/117
 [#110]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/110
 [#109]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/109
 [#108]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/108
