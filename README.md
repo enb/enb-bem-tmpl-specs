@@ -5,6 +5,27 @@ enb-bem-tmpl-specs
 
 Инструмент для сборки и запуска тестов на шаблоны. В процессе сборки генерируются сеты из бандлов с тестами на шаблоны БЭМ-блоков с помощью [ENB](http://enb-make.info/).
 
+<!-- TOC -->
+- [Установка](#Установка)
+- [Как создать тест?](#Как-создать-тест)
+- [Результат сборки](#Результат-сборки)
+- [Поддержка шаблонизаторов](#Поддержка-шаблонизаторов)
+- [Запуск тестов](#Запуск-тестов)
+- [Вывод ошибок](#Вывод-ошибок)
+- [Формат вывода ошибок](#Формат-вывода-ошибок)
+- [Сохранение результатов](#Сохранение-результатов)
+- [Фильтрация тестов](#Фильтрация-тестов)
+  - [Доступные форматы отчетов](#Доступные-форматы-отчетов)
+- [Как использовать?](#Как-использовать)
+  - [Опции для всех уровней-сетов](#Опции-для-всех-уровней-сетов)
+  - [Опции для определенного уровня-сета](#Опции-для-определенного-уровня-сета)
+- [Запуск из консоли](#Запуск-из-консоли)
+  - [Сборка и запуск всех тестов на шаблоны](#Сборка-и-запуск-всех-тестов-на-шаблоны)
+  - [Сборка всех тестов на шаблоны для указанной БЭМ-сущности](#Сборка-всех-тестов-на-шаблоны-для-указанной-БЭМ-сущности)
+- [Лицензия](#Лицензия)
+
+<!-- TOC END -->
+
 Установка
 ---------
 
@@ -140,7 +161,14 @@ module.exports = function (config) {
     config.includeConfig('enb-bem-tmpl-specs'); // Подключаем `enb-bem-tmpl-specs` модуль.
 
     var examples = config.module('enb-bem-tmpl-specs') // Создаём конфигуратор сетов
-        .createConfigurator('tmpl-specs');             //  в рамках таска `specs`.
+        .createConfigurator('tmpl-specs', {            // в рамках таска `specs`.
+            coverage: {                                // Определяем общие опции для всех уровней-сетов.
+                engines: ['bh'],
+                reportDirectory: 'coverage',
+                exclude: ['**/node_modules/**', '**/libs/**'],
+                reporters: ['lcov']
+            }
+        });
 
     examples.configure({
         destPath: 'desktop.tmpl-specs',
@@ -177,7 +205,17 @@ module.exports = function (config) {
 };
 ```
 
-### Опции
+### Опции для всех уровней-сетов
+
+* *Object* `coverage` – собирать информацию о покрытии кода тестами.
+  - *String[]* `engines` – список шаблонизаторов, которые необходимо учитывать при формировании отчета;
+  - *String* `reportDirectory` – название папки, в которой необходимо создать отчет. По умолчанию – `coverage`;
+  - *String[]* `exclude` – маски путей, которые необходимо исключить при формировании отчета. По&nbsp;умолчанию&nbsp;&mdash;&nbsp;`['**/node_modules/**', '**/libs/**']`;
+  - *String[]* `reporters` – форматы отчетов (env: `BEM_TMPL_SPECS_COV_REPORTERS`, названия форматов отчётов передаются через запятую), см.&nbsp;[istanbul#report](https://github.com/gotwarlost/istanbul/tree/master/lib/report). По умолчанию – `['lcov']`.
+* *Object* `htmlDiffer` — настройки сравнения HTML при помощи [html-differ](https://ru.bem.info/tools/testing/html-differ/). По&nbsp;умолчанию&nbsp;&mdash;&nbsp;`{ preset: 'bem' }`.
+* *String|RegExp* `grep` — фильтр тестов по названию (env: `BEM_TMPL_SPECS_GREP`), см. [mocha#grep](http://mochajs.org/#grep-option).
+
+### Опции для определенного уровня-сета
 
 * *String* `destPath` &mdash;&nbsp;путь относительно корня до&nbsp;нового уровня-сета с&nbsp;тестами на шаблоны, которые нужно собрать. Обязательная опция.
 * *String[] | Object[]* `levels` &mdash;&nbsp;уровни, в&nbsp;которых следует искать эталоны. Обязательная опция.
@@ -189,9 +227,8 @@ module.exports = function (config) {
   - *String* `tech` — путь к ENB-технологии;
   - *Object* `options` — опции для ENB-технологии;
   - *Boolean* `async` — асинхронный шаблонизатор;
+* *String* `completeBundle` – имя бандла, в котором будут собраны все БЭМ-сущности из уровней `levels`. По умолчанию `completeBundle` не будет собран.
 * *Boolean* `saveHtml` — сохранять результат html при успешной отрисовке в файл (env: `BEM_TMPL_SPECT_SAVE_HTML`);
-* *String|RegExp* `grep` — фильтр тестов по названию (env: `BEM_TMPL_SPECS_GREP`), см. [mocha#grep](http://mochajs.org/#grep-option).
-* *Object* `htmlDiffer` — настройки сравнения HTML при помощи [html-differ](https://ru.bem.info/tools/testing/html-differ/). По&nbsp;умолчанию&nbsp;&mdash;&nbsp;`{ preset: 'bem' }`.
 * *String|Function* `depsTech` — технология для раскрытия зависимостей. По умолчанию — `deps-old`.
 * *Function* `mockI18N` — функция будет использована вместо ядра `i18n`, если указана опция `langs: true`.
 

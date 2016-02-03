@@ -1,6 +1,74 @@
 История изменений
 =================
 
+1.0.0
+-----
+
+### API
+
+* [ __*major*__ ] Опции `coverage`, `htmlDiffer`, `grep` задаются для [всех уровней-сетов](./README.md#Как-использовать) и не могут быть переопределены при конфигурации определенного уровня-сета.
+* [ __*major*__ ] Поле `completeBundle` вынесено из опции `coverage` в отдельную опцию, которая может быть задана для каждого уровня-сета в отдельности.
+
+**Было:**
+
+```js
+// ...
+
+    var examples = config.module('enb-bem-tmpl-specs')
+        .createConfigurator('tmpl-specs');
+
+    examples.configure({
+        // ...
+
+        coverage: {
+            engines: ['bh'],
+            reportDirectory: 'coverage',
+            exclude: ['**/node_modules/**', '**/libs/**'],
+            reporters: ['lcov'],
+            completeBundle: ''
+        },
+        htmlDiffer: { preset: 'bem' },
+        grep: '*'
+
+        // ...
+    });
+
+// ...
+```
+
+**Стало:**
+
+```js
+// ...
+
+    var examples = config.module('enb-bem-tmpl-specs')
+        .createConfigurator('tmpl-specs', {
+            coverage: {
+                engines: ['bh'],
+                reportDirectory: 'coverage',
+                exclude: ['**/node_modules/**', '**/libs/**'],
+                reporters: ['lcov']
+            },
+            htmlDiffer: { preset: 'bem' },
+            grep: '*'
+        });
+
+    examples.configure({
+        // ...
+
+        compleBundle: ''
+
+        // ...
+    });
+
+// ...
+```
+
+### Исправления ошибок
+
+* Оптимизировали подсчет информации о покрытии кода тестами ([#120]), что позволило снизить нагрузку на потребление оперативной памяти.
+* При падении тестов в одном из уровней-сетов тесты остальных не запускались.
+
 0.16.0
 ------
 
@@ -283,6 +351,7 @@
 
 * Добавлены `summary` и `html` отчёты.
 
+[#120]: https://github.com/enb-bem/enb-bem-tmpl-specs/pull/120
 [#117]: https://github.com/enb-bem/enb-bem-tmpl-specs/pull/117
 [#110]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/110
 [#109]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/109

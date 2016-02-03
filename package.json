@@ -53,7 +53,7 @@
     "test": "npm run lint && npm run clean && npm run build",
     "lint": "jshint . && jscs -c .jscs.js .",
     "deps": "cd examples && bower i",
-    "build": "enb -d examples/silly make tmpl-specs",
+    "build": "enb -d examples/silly make tmpl-specs-with-coverage && enb -d examples/silly make tmpl-specs-without-coverage",
     "clean": "rm -rf examples/*/*tmpl-specs && rm -rf examples/*/.enb/tmp && rm -rf coverage"
   }
 }

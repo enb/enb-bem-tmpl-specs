@@ -21,7 +21,13 @@ module.exports = function (config) {
     config.includeConfig(rootPath);
 
     var module = config.module('enb-bem-tmpl-specs'),
-        helper = module.createConfigurator('tmpl-specs');
+        helperWithCoverage = module.createConfigurator('tmpl-specs-with-coverage', {
+            coverage: {
+                engines: ['BH'],
+                exclude: ['**/*.tmpl-specs/**', '**/node_modules/**']
+            }
+        }),
+        helperWithoutCoverage = module.createConfigurator('tmpl-specs-without-coverage');
 
     declareSpec('no lang', {
         langs: false,
@@ -84,7 +90,7 @@ module.exports = function (config) {
 
         opts.destPath = destPath;
 
-        helper.configure(_.assign({}, {
+        (opts.coverage ? helperWithCoverage : helperWithoutCoverage).configure(_.assign({}, {
             engines: {
                 'BH': opts.langs ? _.assign({}, engines.bh, {
                     options: { requires: { i18n: { globals: 'BEM.I18N' } } }
