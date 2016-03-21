@@ -1,7 +1,7 @@
 enb-bem-tmpl-specs
 ==================
 
-[![NPM version](https://img.shields.io/npm/v/enb-bem-tmpl-specs.svg?style=flat)](http://npmjs.org/package/enb-bem-tmpl-specs) [![Build Status](https://img.shields.io/travis/enb-bem/enb-bem-tmpl-specs/master.svg?style=flat)](https://travis-ci.org/enb-bem/enb-bem-tmpl-specs) [![Dependency Status](https://img.shields.io/david/enb-bem/enb-bem-tmpl-specs.svg?style=flat)](https://david-dm.org/enb-bem/enb-bem-tmpl-specs)
+[![NPM version](https://img.shields.io/npm/v/enb-bem-tmpl-specs.svg?style=flat)](http://npmjs.org/package/enb-bem-tmpl-specs) [![Build Status](https://img.shields.io/travis/enb/enb-bem-tmpl-specs/master.svg?style=flat)](https://travis-ci.org/enb/enb-bem-tmpl-specs) [![Dependency Status](https://img.shields.io/david/enb/enb-bem-tmpl-specs.svg?style=flat)](https://david-dm.org/enb/enb-bem-tmpl-specs)
 
 Инструмент для сборки и запуска тестов на шаблоны. В процессе сборки генерируются сеты из бандлов с тестами на шаблоны БЭМ-блоков с помощью [ENB](http://enb-make.info/).
 

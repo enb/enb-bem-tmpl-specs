@@ -10,7 +10,7 @@
 Контрибьютеры
 -------------
 
-Список контрибьютеров данного проекта доступен по ссылке https://github.com/enb-bem/enb-bem-tmpl-specs/graphs/contributors.
+Список контрибьютеров данного проекта доступен по ссылке https://github.com/enb/enb-bem-tmpl-specs/graphs/contributors.
 
 Вы так же можете получить его с помощью команды `git log --pretty=format:"%an <%ae>" | sort -u`.
 

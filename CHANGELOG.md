@@ -270,7 +270,7 @@
 ### Крупные изменения
 
 * Добавлена поддержка асинхронных шаблонизаторов (@zxqfox [#41]).
-* Добавлена [возможность фильтровать](https://github.com/enb-bem/enb-bem-tmpl-specs#Фильтрация-тестов) запускаемые тесты с помощью опции `grep` или переменной окружения `BEM_TMPL_SPECS_GREP` (@zxqfox [#61]).
+* Добавлена [возможность фильтровать](https://github.com/enb/enb-bem-tmpl-specs#Фильтрация-тестов) запускаемые тесты с помощью опции `grep` или переменной окружения `BEM_TMPL_SPECS_GREP` (@zxqfox [#61]).
 
 ### Исправления ошибок
 
@@ -376,32 +376,32 @@
 
 * Добавлены `summary` и `html` отчёты.
 
-[#120]: https://github.com/enb-bem/enb-bem-tmpl-specs/pull/120
-[#117]: https://github.com/enb-bem/enb-bem-tmpl-specs/pull/117
-[#110]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/110
-[#109]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/109
-[#108]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/108
-[#106]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/106
-[#103]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/103
-[#98]: https://github.com/enb-bem/enb-bem-tmpl-specs/pull/98
-[#94]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/94
-[#93]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/93
-[#88]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/88
-[#83]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/83
-[#74]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/74
-[#73]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/73
-[#70]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/70
-[#68]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/68
-[#61]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/61
-[#54]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/54
-[#50]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/50
-[#47]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/47
-[#41]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/41
-[#87]: https://github.com/enb-bem/enb-bem-tmpl-specs/pull/87
-[#85]: https://github.com/enb-bem/enb-bem-tmpl-specs/pull/85
-[#52]: https://github.com/enb-bem/enb-bem-tmpl-specs/pull/52
-[#49]: https://github.com/enb-bem/enb-bem-tmpl-specs/pull/49
-[#39]: https://github.com/enb-bem/enb-bem-tmpl-specs/pull/39
-[#38]: https://github.com/enb-bem/enb-bem-tmpl-specs/issues/38
-[#36]: https://github.com/enb-bem/enb-bem-tmpl-specs/pull/36
-[#31]: https://github.com/enb-bem/enb-bem-tmpl-specs/pull/31
+[#120]: https://github.com/enb/enb-bem-tmpl-specs/pull/120
+[#117]: https://github.com/enb/enb-bem-tmpl-specs/pull/117
+[#110]: https://github.com/enb/enb-bem-tmpl-specs/issues/110
+[#109]: https://github.com/enb/enb-bem-tmpl-specs/issues/109
+[#108]: https://github.com/enb/enb-bem-tmpl-specs/issues/108
+[#106]: https://github.com/enb/enb-bem-tmpl-specs/issues/106
+[#103]: https://github.com/enb/enb-bem-tmpl-specs/issues/103
+[#98]: https://github.com/enb/enb-bem-tmpl-specs/pull/98
+[#94]: https://github.com/enb/enb-bem-tmpl-specs/issues/94
+[#93]: https://github.com/enb/enb-bem-tmpl-specs/issues/93
+[#88]: https://github.com/enb/enb-bem-tmpl-specs/issues/88
+[#83]: https://github.com/enb/enb-bem-tmpl-specs/issues/83
+[#74]: https://github.com/enb/enb-bem-tmpl-specs/issues/74
+[#73]: https://github.com/enb/enb-bem-tmpl-specs/issues/73
+[#70]: https://github.com/enb/enb-bem-tmpl-specs/issues/70
+[#68]: https://github.com/enb/enb-bem-tmpl-specs/issues/68
+[#61]: https://github.com/enb/enb-bem-tmpl-specs/issues/61
+[#54]: https://github.com/enb/enb-bem-tmpl-specs/issues/54
+[#50]: https://github.com/enb/enb-bem-tmpl-specs/issues/50
+[#47]: https://github.com/enb/enb-bem-tmpl-specs/issues/47
+[#41]: https://github.com/enb/enb-bem-tmpl-specs/issues/41
+[#87]: https://github.com/enb/enb-bem-tmpl-specs/pull/87
+[#85]: https://github.com/enb/enb-bem-tmpl-specs/pull/85
+[#52]: https://github.com/enb/enb-bem-tmpl-specs/pull/52
+[#49]: https://github.com/enb/enb-bem-tmpl-specs/pull/49
+[#39]: https://github.com/enb/enb-bem-tmpl-specs/pull/39
+[#38]: https://github.com/enb/enb-bem-tmpl-specs/issues/38
+[#36]: https://github.com/enb/enb-bem-tmpl-specs/pull/36
+[#31]: https://github.com/enb/enb-bem-tmpl-specs/pull/31
