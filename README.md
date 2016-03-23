@@ -213,6 +213,7 @@ module.exports = function (config) {
   - *String[]* `exclude` – маски путей, которые необходимо исключить при формировании отчета. По&nbsp;умолчанию&nbsp;&mdash;&nbsp;`['**/node_modules/**', '**/libs/**']`;
   - *String[]* `reporters` – форматы отчетов (env: `BEM_TMPL_SPECS_COV_REPORTERS`, названия форматов отчётов передаются через запятую), см.&nbsp;[istanbul#report](https://github.com/gotwarlost/istanbul/tree/master/lib/report). По умолчанию – `['lcov']`.
 * *Object* `htmlDiffer` — настройки сравнения HTML при помощи [html-differ](https://ru.bem.info/tools/testing/html-differ/). По&nbsp;умолчанию&nbsp;&mdash;&nbsp;`{ preset: 'bem' }`.
+* *Number* `timeout` — время ожидания тест-кейса в миллисекундах (env: `BEM_TMPL_SPECS_TIMEOUT`).
 * *String|RegExp* `grep` — фильтр тестов по названию (env: `BEM_TMPL_SPECS_GREP`), см. [mocha#grep](http://mochajs.org/#grep-option).
 
 ### Опции для определенного уровня-сета
