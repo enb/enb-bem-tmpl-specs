@@ -1,6 +1,13 @@
 История изменений
 =================
 
+1.1.0
+-----
+
+### Опции
+
+* Добавлена опция `timeout` ([#122]).
+
 1.0.3
 -----
 
@@ -383,6 +390,7 @@
 
 * Добавлены `summary` и `html` отчёты.
 
+[#122]: https://github.com/enb/enb-bem-tmpl-specs/pull/122
 [#120]: https://github.com/enb/enb-bem-tmpl-specs/pull/120
 [#117]: https://github.com/enb/enb-bem-tmpl-specs/pull/117
 [#110]: https://github.com/enb/enb-bem-tmpl-specs/issues/110
