@@ -80,7 +80,7 @@ function loadTemplate(file, exportName) {
         return { apply: function() { return e.stack; } };
     }
 }
-function reRequire(file, exportName) {
+function reRequire(file) {
     file = require.resolve(file);
     clearRequire(file);
     return require(file);
