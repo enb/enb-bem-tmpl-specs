@@ -1,6 +1,12 @@
 История изменений
 =================
 
+1.2.0
+-----
+
+* Добавлены опции `prependFiles` и `appendFiles` ([#124]).
+* Улучшена производительность ([#125]).
+
 1.1.0
 -----
 
@@ -390,6 +396,8 @@
 
 * Добавлены `summary` и `html` отчёты.
 
+[#125]: https://github.com/enb/enb-bem-tmpl-specs/pull/125
+[#124]: https://github.com/enb/enb-bem-tmpl-specs/pull/124
 [#122]: https://github.com/enb/enb-bem-tmpl-specs/pull/122
 [#120]: https://github.com/enb/enb-bem-tmpl-specs/pull/120
 [#117]: https://github.com/enb/enb-bem-tmpl-specs/pull/117
