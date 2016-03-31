@@ -21,104 +21,67 @@ var assert = require('assert'),
     clearRequire = require('${ paths['clear-require'] }'),
     HtmlDiffer = require('${ paths['html-differ'] }').HtmlDiffer,
     htmlDiffer = new HtmlDiffer(${ JSON.stringify(diffOpts) }),
-    referencesFilename = require.resolve('${ paths.references }');
+    referencesJSON = JSON.stringify(require('${ paths.references }')),
+    getReferences = function () {
+        return JSON.parse(referencesJSON);
+    };
 
 describe('${ describe }', function() {
-    var engines = {},
-        references;
-
-    beforeEach(function () {
-        // reload references
-        clearRequire(referencesFilename);
-        references = require(referencesFilename);
-    });
-
-<% if (!(langs && langs.length)) { %>
-    //
-    // no langs mode
-    //
-
-    beforeEach(function () {
-        // reload engines artifacts
-        engines = {};
-        <% _.forEach(engines, function(engine) {
-            reRequire('engines', engine);
-        }); %>
-    });
-
     <% _.forEach(its, function(it) { %>
     describe('${ it }', function() {
 
         <% _.forEach(engines, function(engine) {
+            var lang = engine.lang;
+
             print(template('it', {
                 it: it,
+                before: [
+                    'var references = getReferences();',
+                    'var engine = ' + loadTemplate(engine.target, engine.exportName) + ';',
+                ].join('\n'),
                 engine: engine,
-                lang: null,
+                lang: lang.isReal ? lang.name : null,
                 saveHtml: saveHtml
             }));
         }); %>
 
-    }); // describe ${ it }
-    <% }); // _.forEach its %>
-
-<% } else { // langs.length > 0 %>
-    //
-    // langs mode
-    //
-
-    <% _.forEach(langs, function (lang) { %>
-    describe('with lang `${ lang }`', function() {
-
-        beforeEach(function () {
-            <% _.forEach(engines, function(engine) {
-                var engineObject = 'engines[\'' + engine.name + '\']';
-                print(engineObject + ' = {};\n');
-                reRequire(engineObject, engine.langs.filter(function (_lang) { return lang === _lang.name; })[0]);
-            }); %>
-        });
-
-        <% _.forEach(its, function(it) { %>
-        describe('${ it }', function() {
-
-            <% _.forEach(engines, function(engine) {
-                print(template('it', {
-                    it: it,
-                    engine: engine,
-                    lang: lang,
-                    saveHtml: saveHtml
-                }));
-            }); %>
-
-        });
-        <% }); %>
-
     });
     <% }); %>
 
-<% }; // /if langs %>
-
 }); // /describe ${ describe }
-<%
-function reRequire(where, what) {
-    var name = what.name,
-        target = what.target,
-        exportName = what.exportName;
-    print('clearRequire(require.resolve(\'' + target + '\'));\n');
-    print(where + '[\'' + name + '\'] = require(\'' + target + '\')' + exportName + ';\n');
-}
-%>
+
 function assertHtml(actual, expected, done, filename) {
 <% if (saveHtml) {%>
     saveHtmlFile(filename, actual, function() {
 <% } %>
     if (htmlDiffer.isEqual(actual, expected)) {
+        // Throw error if actual is empty
         assert.ok(actual);
         done && done(null);
     } else {
-
-            assert.fail(actual, expected, null, '\n');
+        assert.fail(actual, expected, null, '\n');
     }
 <% if (saveHtml) {%>
     });
 <% } %>
+}
+<%
+function loadTemplate(target, exportName) {
+    return 'loadTemplate(' + JSON.stringify(target) + ', ' + JSON.stringify(exportName) + ')';
+}
+%>
+function loadTemplate(file, exportName) {
+    try {
+        var res = reRequire(file);
+        exportName && (res = res[exportName]);
+        return res;
+    } catch (e) {
+        console.error(e.stack);
+        return { apply: function() { return e.stack; } };
+    }
+}
+function reRequire(file, exportName) {
+    file = require.resolve(file);
+    clearRequire(file);
+    return require(file);
 }
