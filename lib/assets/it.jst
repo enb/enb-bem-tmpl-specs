@@ -10,12 +10,14 @@ if (saveHtml) {
 }
 %>
 it('should be equal `${ it }` by ${ engine.name }${ titleSuffix }', function (<% if (saveHtml || engine.async) { %>done<% } %>) {
+    ${ before }
+
     var bemjson = references['${ it }']${ subreference }.bemjson,
         expected = references['${ it }']${ subreference }.html;<%
 
 if (!engine.async) { %>
     // sync mode
-    var actual = engines['${ engine.name }']${ subreference }.apply(bemjson);
+    var actual = engine.apply(bemjson);
 
 
 <% if (saveHtml) { %>
@@ -25,7 +27,7 @@ if (!engine.async) { %>
 <% }
 } else { // engine.async %>
     // async mode
-    engines['${ engine.name }']${ subreference }.apply(bemjson, function(errs, actual) {
+    engine.apply(bemjson, function(errs, actual) {
         if (errs !== null) {
             done(errs);
             return;
