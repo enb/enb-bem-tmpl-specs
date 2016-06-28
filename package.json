@@ -35,6 +35,7 @@
     "lodash": "3.10.1",
     "minimatch": "2.0.10",
     "mocha": "2.4.5",
+    "mocha-teamcity-reporter": "1.0.0",
     "vow": "0.4.12",
     "vow-fs": "0.3.4"
   },
