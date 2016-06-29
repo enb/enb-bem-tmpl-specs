@@ -2,47 +2,48 @@
 // prepares
 var titleSuffix = lang ? ' in `' + lang + '` lang' : '';
 var subreference = lang ? '[\'' + lang + '\']' : '';
-var prettifyEngineName = function (ngn) {
-    return lang ? String(ngn).toLowerCase().replace(' ', '-') + '.' + lang : ngn;
-};
-if (saveHtml) {
-    var filename = [it, prettifyEngineName(engine.name), 'html'].join('.');
-}
 %>
-it('should be equal `${ it }` by ${ engine.name }${ titleSuffix }', function (<% if (saveHtml || engine.async) { %>done<% } %>) {
+
+it('should be equal `${ it }` by ${ engine.name }${ titleSuffix }', function () {
     ${ before }
 
-    var bemjson = references['${ it }']${ subreference }.bemjson,
-        expected = references['${ it }']${ subreference }.html;<%
+    var ref = references['${ it }']${ subreference },
+        bemjson = ref.bemjson,
+        expected = ref.html;
 
-if (!engine.async) { %>
-    // sync mode
-    var actual = engine.apply(bemjson);
+    <% if (saveHtml || saveReferenceHtml) { %>
+        var filenames = [];
+    <% } %>
 
+    <% if (saveReferenceHtml) {%>
+        filenames.push(path.join(ref.dir, '${ referenceHtmlFilename }'));
+    <% } %>
 
-<% if (saveHtml) { %>
-    assertHtml(actual, expected, done, '${ filename }');
-<% } else {%>
-    assertHtml(actual, expected);
-<% }
-} else { // engine.async %>
-    // async mode
-    engine.apply(bemjson, function(errs, actual) {
-        if (errs !== null) {
-            done(errs);
-            return;
-        }
+    <% if (saveHtml) {%>
+        filenames.push(path.join(__dirname, '${ htmlFilename }'));
+    <% } %>
 
-        assertHtml(actual, expected, function(err) {
-<% if (saveHtml) {%>
-            saveHtmlFile('${ filename }', actual, function() {
-                done(err || null);
+    return new vow.Promise(function(resolve, reject) {
+        <% if (engine.async) { %>
+            engine.apply(bemjson, function(errs, actual) {
+                if (errs !== null) {
+                    reject(errs);
+                    return;
+                }
+
+                resolve(actual);
             });
-<% } else { %>
-            done(err || null);
-<% } %>
-        });
-    });<%
-} %>
+        <% } else { %>
+            resolve(engine.apply(bemjson));
+        <% } %>
+    }).then(function(actual) {
+        <% if (saveHtml || saveReferenceHtml) { %>
+            return saveHtmlFile(filenames, actual).always(function() {
+                return assertHtml(actual, expected);
+            });
+        <% } else { %>
+            return assertHtml(actual, expected);
+        <% } %>
+    });
 
 });
