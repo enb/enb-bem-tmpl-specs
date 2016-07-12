@@ -9,16 +9,18 @@ if (saveHtml) {
     var filename = [it, prettifyEngineName(engine.name), 'html'].join('.');
 }
 %>
+
 it('should be equal `${ it }` by ${ engine.name }${ titleSuffix }', function (<% if (saveHtml || engine.async) { %>done<% } %>) {
     ${ before }
 
     var bemjson = references['${ it }']${ subreference }.bemjson,
-        expected = references['${ it }']${ subreference }.html;<%
+        expected = references['${ it }']${ subreference }.html;
+
+    filtor && (expected = filtor(expected));<%
 
 if (!engine.async) { %>
     // sync mode
     var actual = engine.apply(bemjson);
-
 
 <% if (saveHtml) { %>
     assertHtml(actual, expected, done, '${ filename }');

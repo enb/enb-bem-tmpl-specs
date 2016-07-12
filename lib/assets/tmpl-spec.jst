@@ -38,6 +38,7 @@ describe('${ describe }', function() {
                 before: [
                     'var references = getReferences();',
                     'var engine = ' + loadTemplate(engine.target, engine.exportName) + ';',
+                    'var filtor = ' + String(engine.filtor) + ';',
                 ].join('\n'),
                 engine: engine,
                 lang: lang.isReal ? lang.name : null,
