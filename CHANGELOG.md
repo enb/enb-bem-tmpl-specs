@@ -1,6 +1,27 @@
 История изменений
 =================
 
+1.3.0
+-----
+
+### Улучшения
+
+* Добавлена возможность [создания эталонов](#Создание-эталонов) (@sbmaxx [#128]).
+* Добавлен teamcity reporter (@sbmaxx [#127]).
+
+### Исправления
+
+* Исправлено подключение модулей в Windows (@ErBlack [#126]).
+
+### Зависимости
+
+* Модуль `bem-naming@0.5.1` обновлен до версии `1.0.1`.
+* Модуль `inherit@2.2.3` обновлен до версии `2.2.4`.
+* Модуль `istanbul@0.4.2` обновлен до версии `0.4.4`.
+* Модуль `js-beautify@1.5.10` обновлен до версии `1.6.3`.
+* Модуль `mocha@2.4.5` обновлен до версии `2.5.3`.
+* Модуль `vow-fs@0.3.4` обновлен до версии `0.3.5`.
+
 1.2.0
 -----
 
@@ -396,6 +417,9 @@
 
 * Добавлены `summary` и `html` отчёты.
 
+[#128]: https://github.com/enb/enb-bem-tmpl-specs/pull/128
+[#127]: https://github.com/enb/enb-bem-tmpl-specs/pull/127
+[#126]: https://github.com/enb/enb-bem-tmpl-specs/pull/126
 [#125]: https://github.com/enb/enb-bem-tmpl-specs/pull/125
 [#124]: https://github.com/enb/enb-bem-tmpl-specs/pull/124
 [#122]: https://github.com/enb/enb-bem-tmpl-specs/pull/122
