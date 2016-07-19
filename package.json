@@ -20,7 +20,7 @@
     "enb-magic-factory": ">= 0.3.0 < 1.0.0"
   },
   "dependencies": {
-    "bem-naming": "0.5.1",
+    "bem-naming": "1.0.1",
     "clear-require": "1.0.1",
     "enb-bem-i18n": "1.1.1",
     "enb-bem-pseudo-levels": "0.3.0",
@@ -28,26 +28,26 @@
     "enb-require-or-eval": "1.0.2",
     "enb-source-map": "1.9.0",
     "html-differ": "1.3.3",
-    "inherit": "2.2.3",
-    "istanbul": "0.4.2",
+    "inherit": "2.2.4",
+    "istanbul": "0.4.4",
     "jade": "1.11.0",
-    "js-beautify": "1.5.10",
+    "js-beautify": "1.6.3",
     "lodash": "3.10.1",
-    "minimatch": "2.0.10",
-    "mocha": "2.4.5",
-    "mocha-teamcity-reporter": "1.0.0",
+    "minimatch": "3.0.2",
+    "mocha": "2.5.3",
+    "mocha-teamcity-reporter": "1.0.2",
     "vow": "0.4.12",
-    "vow-fs": "0.3.4"
+    "vow-fs": "0.3.5"
   },
   "devDependencies": {
-    "bower": "1.5.2",
-    "enb": ">= 0.15.0 < 1.0.0",
-    "enb-bemxjst": "2.1.0",
-    "enb-bh": "1.1.1",
+    "bower": "1.7.9",
+    "enb": ">=1.3.0",
+    "enb-bemxjst": "2.1.1",
+    "enb-bh": "1.2.0",
     "enb-magic-factory": ">= 0.3.0 < 1.0.0",
-    "jscs": "1.13.1",
-    "jshint": "2.8.0",
-    "must": "0.12.0"
+    "jscs": "3.0.7",
+    "jshint": "2.9.2",
+    "must": "0.13.1"
   },
   "main": "lib/index.js",
   "scripts": {
