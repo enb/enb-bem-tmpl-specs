@@ -1,7 +1,8 @@
 var assert = require('assert'),
     path = require('path'),
-<% if (saveHtml) { %>
-    fs = require('fs'),
+    vow = require('${ paths['vow'] }'),
+<% if (saveHtml || saveReferenceHtml) { %>
+    vowFs = require('${ paths['vow-fs'] }'),
     beautifyHtml = function(html) {
         return require('${ paths['js-beautify'] }').html(html, beautifyHtmlConfig);
     },
@@ -14,8 +15,15 @@ var assert = require('assert'),
     'font', 'ins', 'del', 'pre', 'address', 'dt',
     'q', 'i', 'b', 'u', 's', 'bdo', 'em'
     ]},
-    saveHtmlFile = function(filename, actual, done) {
-        fs.writeFile(path.join(__dirname, filename), beautifyHtml(actual), done);
+    saveHtmlFile = function(filenames, actual) {
+        if (!Array.isArray(filenames)) {
+            filenames = [filenames];
+        }
+        var html = beautifyHtml(actual);
+
+        return vow.all(filenames.map(function(filename) {
+            return vowFs.write(filename, html, 'utf8');
+        }));
     },
 <% } %>
     clearRequire = require('${ paths['clear-require'] }'),
@@ -26,12 +34,30 @@ var assert = require('assert'),
         return JSON.parse(referencesJSON);
     };
 
+<%
+var prettifyEngineName = function(ngn) {
+    return String(ngn).toLowerCase().replace(' ', '-');
+}
+%>
+
 describe('${ describe }', function() {
     <% _.forEach(its, function(it) { %>
     describe('${ it }', function() {
 
         <% _.forEach(engines, function(engine) {
-            var lang = engine.lang;
+            var lang = engine.lang,
+                filename = it,
+                engineName = prettifyEngineName(engine.name);
+
+            lang = lang.isReal ? lang.name : null;
+
+            filename += '.' + engineName;
+
+            if (lang) {
+                filename += '.' + lang;
+            }
+
+            filename += '.html';
 
             print(template('it', {
                 it: it,
@@ -40,8 +66,11 @@ describe('${ describe }', function() {
                     'var engine = ' + loadTemplate(engine.target, engine.exportName) + ';',
                 ].join('\n'),
                 engine: engine,
-                lang: lang.isReal ? lang.name : null,
-                saveHtml: saveHtml
+                lang: lang,
+                saveHtml: saveHtml,
+                saveReferenceHtml: saveReferenceHtml,
+                htmlFilename: filename,
+                referenceHtmlFilename: engines.length > 1 ? filename : filename.replace('.' + engineName, '')
             }));
         }); %>
 
@@ -50,20 +79,13 @@ describe('${ describe }', function() {
 
 }); // /describe ${ describe }
 
-function assertHtml(actual, expected, done, filename) {
-<% if (saveHtml) {%>
-    saveHtmlFile(filename, actual, function() {
-<% } %>
-    if (htmlDiffer.isEqual(actual, expected)) {
+function assertHtml(actual, expected) {
+   if (htmlDiffer.isEqual(actual, expected)) {
         // Throw error if actual is empty
         assert.ok(actual);
-        done && done(null);
     } else {
         assert.fail(actual, expected, null, '\n');
     }
-<% if (saveHtml) {%>
-    });
-<% } %>
 }
 <%
 function loadTemplate(target, exportName) {
