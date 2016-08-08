@@ -42,7 +42,7 @@
   "devDependencies": {
     "bower": "^1.7.9",
     "enb": ">=1.3.0",
-    "enb-bemxjst": "^2.1.1",
+    "enb-bemxjst": "^7.0.1",
     "enb-bh": "^1.2.0",
     "enb-magic-factory": ">= 0.3.0 < 1.0.0",
     "jscs": "^3.0.7",
