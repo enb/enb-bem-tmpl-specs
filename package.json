@@ -37,7 +37,7 @@
     "mocha": "3.0.2",
     "mocha-teamcity-reporter": "1.0.2",
     "vow": "0.4.12",
-    "vow-fs": "0.3.5"
+    "vow-fs": "0.3.6"
   },
   "devDependencies": {
     "bower": "^1.7.9",
