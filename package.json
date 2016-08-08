@@ -32,7 +32,7 @@
     "istanbul": "0.4.4",
     "jade": "1.11.0",
     "js-beautify": "1.6.3",
-    "lodash": "3.10.1",
+    "lodash": "4.14.2",
     "minimatch": "3.0.3",
     "mocha": "3.0.2",
     "mocha-teamcity-reporter": "1.0.2",
