@@ -1,6 +1,17 @@
 История изменений
 =================
 
+1.3.1
+-----
+
+### Зависимости
+
+* Модуль `html-differ@1.3.3` обновлен до версии `1.3.4`.
+* Модуль `inherit@2.2.4` обновлен до версии `2.2.5`.
+* Модуль `lodash@3.10.1` обновлен до версии `4.14.2` ([#139]).
+* Модуль `minimatch@3.0.2` обновлен до версии `3.0.3`.
+* Модуль `vow-fs@0.3.5` обновлен до версии `0.3.6`.
+
 1.3.0
 -----
 
@@ -417,6 +428,7 @@
 
 * Добавлены `summary` и `html` отчёты.
 
+[#139]: https://github.com/enb/enb-bem-tmpl-specs/pull/139
 [#128]: https://github.com/enb/enb-bem-tmpl-specs/pull/128
 [#127]: https://github.com/enb/enb-bem-tmpl-specs/pull/127
 [#126]: https://github.com/enb/enb-bem-tmpl-specs/pull/126
