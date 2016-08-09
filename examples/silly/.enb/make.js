@@ -95,8 +95,9 @@ module.exports = function (config) {
                 'BH': opts.langs ? _.assign({}, engines.bh, {
                     options: { requires: { i18n: { globals: 'BEM.I18N' } } }
                 }) : engines.bh,
-                'BEMHTML dev': _.assign({}, engines.bemhtml, { options: { devMode: true } }),
-                'BEMHTML prod': _.assign({}, engines.bemhtml, { options: { devMode: false } })
+                'BEMHTML': _.assign({}, engines.bemhtml, { options: {
+                    engineOptions: { xhtml: true }
+                } })
             },
             // levels for specs
             levels: [
