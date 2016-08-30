@@ -31,7 +31,7 @@
     "inherit": "2.2.5",
     "istanbul": "0.4.5",
     "jade": "1.11.0",
-    "js-beautify": "1.6.3",
+    "js-beautify": "1.6.4",
     "lodash": "4.15.0",
     "minimatch": "3.0.3",
     "mocha": "3.0.2",
