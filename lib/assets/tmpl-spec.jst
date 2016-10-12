@@ -1,5 +1,6 @@
 var assert = require('assert'),
     path = require('path'),
+    fs = require('fs'),
     vow = require('${ paths['vow'] }'),
 <% if (saveHtml || saveReferenceHtml) { %>
     vowFs = require('${ paths['vow-fs'] }'),
@@ -26,7 +27,7 @@ var assert = require('assert'),
         }));
     },
 <% } %>
-    clearRequire = require('${ paths['clear-require'] }'),
+    safeEval = require('${ paths['node-eval'] }'),
     HtmlDiffer = require('${ paths['html-differ'] }').HtmlDiffer,
     htmlDiffer = new HtmlDiffer(${ JSON.stringify(diffOpts) }),
     referencesJSON = JSON.stringify(require('${ paths.references }')),
@@ -103,7 +104,7 @@ function loadTemplate(file, exportName) {
     }
 }
 function reRequire(file) {
-    file = require.resolve(file);
-    clearRequire(file);
-    return require(file);
+    var filename = require.resolve(file);
+    var str = fs.readFileSync(filename, 'utf-8');
+    return safeEval(str, filename);
 }
