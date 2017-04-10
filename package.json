@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "bem-naming": "1.0.1",
-    "clear-require": "1.0.1",
+    "clear-require": "2.0.0",
     "enb-bem-i18n": "1.1.1",
     "enb-bem-pseudo-levels": "0.4.0",
     "enb-bem-techs": "2.2.2",
