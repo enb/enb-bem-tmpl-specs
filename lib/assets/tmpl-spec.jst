@@ -1,6 +1,7 @@
 var assert = require('assert'),
     path = require('path'),
     vow = require('${ paths['vow'] }'),
+    _ = require('lodash'),
 <% if (saveHtml || saveReferenceHtml) { %>
     vowFs = require('${ paths['vow-fs'] }'),
     beautifyHtml = function(html) {
@@ -15,14 +16,20 @@ var assert = require('assert'),
     'font', 'ins', 'del', 'pre', 'address', 'dt',
     'q', 'i', 'b', 'u', 's', 'bdo', 'em'
     ]},
-    saveHtmlFile = function(filenames, actual) {
+    saveToFile = function(filenames, actual) {
         if (!Array.isArray(filenames)) {
             filenames = [filenames];
         }
-        var html = beautifyHtml(actual);
+
+        var data;
+        if (typeof actual === 'string') {
+            data = beautifyHtml(actual);
+        } else {
+            data = '(' + JSON.stringify(actual, null, 4) + ')'; 
+        }
 
         return vow.all(filenames.map(function(filename) {
-            return vowFs.write(filename, html, 'utf8');
+            return vowFs.write(filename, data, 'utf8');
         }));
     },
 <% } %>
@@ -57,7 +64,11 @@ describe('${ describe }', function() {
                 filename += '.' + lang;
             }
 
-            filename += '.html';
+            if (engine.name === 'bemhtml') {
+                filename += '.html';
+            } else {
+                filename += '.js';
+            } 
 
             print(template('it', {
                 it: it,
@@ -79,13 +90,28 @@ describe('${ describe }', function() {
 
 }); // /describe ${ describe }
 
-function assertHtml(actual, expected) {
-   if (htmlDiffer.isEqual(actual, expected)) {
-        // Throw error if actual is empty
-        assert.ok(actual);
-    } else {
-        assert.fail(actual, expected, null, '\n');
-    }
+var assertBind = [{
+    type: 'object',
+    handler: function(actual, expected) {
+        return _.isEqual(actual, expected);
+    },
+}, {
+    type: 'string',
+    handler: function(actual, expected) {
+        return htmlDiffer.isEqual(actual, expected);
+    },
+}];
+
+function assertResult(actual, expected) {
+    assertBind.forEach(function(item) {
+        if ( typeof actual !== item.type ) return;
+
+        if (item.handler(actual, expected)) {
+            assert.ok(actual);
+        } else {
+            assert.fail(actual, expected, null, '\n');
+        }
+    });
 }
 <%
 function loadTemplate(target, exportName) {
