@@ -64,11 +64,7 @@ describe('${ describe }', function() {
                 filename += '.' + lang;
             }
 
-            if (engine.name === 'bemhtml') {
-                filename += '.html';
-            } else {
-                filename += '.js';
-            } 
+            filename += engine.name === 'bemhtml' ? '.html' : '.js';
 
             print(template('it', {
                 it: it,
