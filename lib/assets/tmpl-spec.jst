@@ -86,28 +86,14 @@ describe('${ describe }', function() {
 
 }); // /describe ${ describe }
 
-var assertBind = [{
-    type: 'object',
-    handler: function(actual, expected) {
-        return _.isEqual(actual, expected);
-    },
-}, {
-    type: 'string',
-    handler: function(actual, expected) {
-        return htmlDiffer.isEqual(actual, expected);
-    },
-}];
-
 function assertResult(actual, expected) {
-    assertBind.forEach(function(item) {
-        if ( typeof actual !== item.type ) return;
+    var isOk = typeof actual === 'string' ?
+        htmlDiffer.isEqual(actual, expected) :
+        _.isEqual(actual, expected);
 
-        if (item.handler(actual, expected)) {
-            assert.ok(actual);
-        } else {
-            assert.fail(actual, expected, null, '\n');
-        }
-    });
+    isOk ?
+        assert.ok(actual) :
+        assert.fail(actual, expected, null, '\n');
 }
 <%
 function loadTemplate(target, exportName) {
