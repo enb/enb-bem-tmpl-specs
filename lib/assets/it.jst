@@ -48,7 +48,7 @@ it('should be equal `${ it }` by ${ engine.name }${ titleSuffix }', function () 
             return;
         }
 
-        <% if (saveHtml || saveReferenceHtml || actual) { %>
+        <% if (saveHtml || saveReferenceHtml) { %>
             return saveToFile(filenames, actual).always(function() {
                 return assertResult(actual, expected);
             });
