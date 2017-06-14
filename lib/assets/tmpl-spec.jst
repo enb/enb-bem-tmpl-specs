@@ -2,6 +2,7 @@ var assert = require('assert'),
     path = require('path'),
     vow = require('${ paths['vow'] }'),
     _ = require('lodash'),
+    stringifyObject = require('stringify-object'),
 <% if (saveHtml || saveReferenceHtml) { %>
     vowFs = require('${ paths['vow-fs'] }'),
     beautifyHtml = function(html) {
@@ -21,12 +22,9 @@ var assert = require('assert'),
             filenames = [filenames];
         }
 
-        var data;
-        if (typeof actual === 'string') {
-            data = beautifyHtml(actual);
-        } else {
-            data = '(' + JSON.stringify(actual, null, 4) + ')'; 
-        }
+        var data = typeof actual === 'string' ?
+            beautifyHtml(actual) :
+            '(' + stringifyObject(actual) + ')'; 
 
         return vow.all(filenames.map(function(filename) {
             return vowFs.write(filename, data, 'utf8');
