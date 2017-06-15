@@ -24,7 +24,7 @@ var assert = require('assert'),
 
         var data = typeof actual === 'string' ?
             beautifyHtml(actual) :
-            '(' + stringifyObject(actual) + ')'; 
+            '(' + stringifyObject(actual, { indent: '    '}) + ')'; 
 
         return vow.all(filenames.map(function(filename) {
             return vowFs.write(filename, data, 'utf8');
@@ -34,10 +34,7 @@ var assert = require('assert'),
     clearRequire = require('${ paths['clear-require'] }'),
     HtmlDiffer = require('${ paths['html-differ'] }').HtmlDiffer,
     htmlDiffer = new HtmlDiffer(${ JSON.stringify(diffOpts) }),
-    referencesJSON = JSON.stringify(require('${ paths.references }')),
-    getReferences = function () {
-        return JSON.parse(referencesJSON);
-    };
+    references = require('${ paths.references }');
 
 <%
 var prettifyEngineName = function(ngn) {
@@ -66,10 +63,9 @@ describe('${ describe }', function() {
 
             print(template('it', {
                 it: it,
-                before: [
-                    'var references = getReferences();',
-                    'var engine = ' + loadTemplate(engine.target, engine.exportName) + ';',
-                ].join('\n'),
+                before: 'var engine = ' + loadTemplate(
+                    engine.target, engine.exportName
+                ) + ';',
                 engine: engine,
                 lang: lang,
                 saveHtml: saveHtml,
