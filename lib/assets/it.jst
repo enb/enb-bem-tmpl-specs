@@ -9,7 +9,7 @@ it('should be equal `${ it }` by ${ engine.name }${ titleSuffix }', function () 
 
     var ref = references['${ it }']${ subreference },
         _this = this,
-        <% if (engine.name == 'bemtree') { %>
+        <% if (engine.name === 'bemtree') { %>
             source = ref.data,
             expected = ref.bemjson;
         <% } else { %>
@@ -17,7 +17,7 @@ it('should be equal `${ it }` by ${ engine.name }${ titleSuffix }', function () 
             expected = ref.html;
         <% } %>
 
-    <% if (saveHtml || saveReferenceHtml) { %>
+    <% if (saveHtml || saveReferenceHtml || autoAddReference) { %>
         var filenames = [];
     <% } %>
 
@@ -47,8 +47,14 @@ it('should be equal `${ it }` by ${ engine.name }${ titleSuffix }', function () 
             _this.skip();
             return;
         }
+        <% if (autoAddReference) {%>
+            if (!expected) {
+                filenames.push(path.join(ref.dir) + '/${ it }.${ engine.name === 'bemtree' ? 'bemjson.js' : 'html' }');
+            }
+        <% } %>
 
-        <% if (saveHtml || saveReferenceHtml) { %>
+
+        <% if (saveHtml || saveReferenceHtml || autoAddReference) { %>
             return saveToFile(filenames, actual).always(function() {
                 return assertResult(actual, expected);
             });
