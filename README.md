@@ -48,7 +48,7 @@ $ tree -a <level>.blocks/<block-name>/<block-name>.tmpl-specs
 <block-name>/
  └── <block-name>.tmpl-specs/
       ├── 10-default.bemjson.js  # Эталонный BEMJSON-код сравниваемый с результатом
-      │                          #  обработки BEMTREE, а так же пример для BEMHTML
+      │                          #  обработки BEMTREE, а также пример для BEMHTML
       ├── 10-default.data.js     # Пример в технологии BEMJSON для обработки BEMTREE 
       │                          #  шаблонизатором
       ├── 10-default.html        # Эталонный HTML-код сравниваемый с результатом 
