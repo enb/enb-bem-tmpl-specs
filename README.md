@@ -40,17 +40,19 @@ $ npm install --save-dev enb-bem-tmpl-specs
 
 Чтобы добавить тест для БЭМ-сущности, нужно в её директории на требуемом уровне переопределения создать каталог с названием `bem-name.tmpl-specs` для хранения файлов тестов.
 
-Каждый тест состоит из пары файлов в технологиях BEMJSON и HTML. Таких пар файлов у блока может быть несколько. Имена файлов произвольные, но они (не включая расширения) для каждого теста должны совпадать. Например, **10-default**.bemjson.js и **10-default**.html.
-
-В BEMJSON-файле находится пример для БЭМ-сущности, в HTML – эталонный HTML-код, который должен получиться после выполнения шаблонов с данным BEMJSON.
+Каждый тест состоит из пары файлов «пример» и «эталон», где каждый файл создаётся в своей технологии, например BEMJSON и HTML. Таких пар файлов у блока может быть несколько. Имена файлов произвольные, но они (не включая расширения) для каждого теста должны совпадать. Например, **10-default**.bemjson.js и **10-default**.html.
 
 ```sh
 $ tree -a <level>.blocks/<block-name>/<block-name>.tmpl-specs
 
 <block-name>/
  └── <block-name>.tmpl-specs/
-      ├── 10-default.bemjson.js
-      ├── 10-default.html
+      ├── 10-default.bemjson.js  # Эталонный BEMJSON-код сравниваемый с результатом
+      │                          #  обработки BEMTREE, а также пример для BEMHTML
+      ├── 10-default.data.js     # Пример в технологии BEMJSON для обработки BEMTREE 
+      │                          #  шаблонизатором
+      ├── 10-default.html        # Эталонный HTML-код сравниваемый с результатом 
+      │                          #  обработки BEMHTML
       ├── 20-advanced.bemjson.js
       └── 20-advanced.html
 ```
@@ -65,11 +67,14 @@ $ tree -a <set-name>.tmpl-specs
 
 <set-name>.tmpl-specs/
  └── <block-name>/
-      ├── <block-name>.references.js  # Набор из пар эталонов (BEMJSON + HTML).
+      ├── <block-name>.references.js  # Набор из пар эталонов (data + bemjson для BEMTREE
+      │                               #  и bemjson + html для BEMHTML).
       ├── <block-name>.bemhtml.js     # Код BEMHTML-шаблонов, необходимый для
-                                      #  выполнения эталонов из `references.js`.
+      │                               #  выполнения эталонов из `references.js`.
+      ├── <block-name>.bemtree.js     # Код BEMTREE-шаблонов, необходимый для
+      │                               #  выполнения эталонов из `references.js`.
       ├── <block-name>.bh.js          # Код BH-шаблонов, необходимый для
-                                      #  выполнения эталонов из `references.js`.
+      │                               #  выполнения эталонов из `references.js`.
       └── <block-name>.tmpl-spec.js   # Код тестов в BDD-стиле.
 ```
 
@@ -79,6 +84,7 @@ $ tree -a <set-name>.tmpl-specs
 * BEMHTML на основе [XJST](https://ru.bem.info/tools/templating-engines/xjst/). Базовые шаблоны находятся в [bem-bl](https://ru.bem.info/libs/bem-bl/dev/).
 * BEMHTML на основе [BEM-XJST](https://ru.bem.info/tools/templating-engines/bemxjst/). Базовые шаблоны находятся в [bem-core](https://ru.bem.info/libs/bem-core/current/).
 * [BH](https://ru.bem.info/technology/bh/).
+* BEMTREE на основе [BEM-XJST](https://ru.bem.info/tools/templating-engines/bemxjst/).
 
 Запуск тестов
 -------------
@@ -96,7 +102,9 @@ $ tree -a <set-name>.tmpl-specs
 
 ![2014-09-22 13 01 29](https://cloud.githubusercontent.com/assets/2225579/4353728/ecaa52da-4236-11e4-84f1-d7cfc623cff7.png)
 
-Для вывода различий используется [html-differ](https://ru.bem.info/tools/testing/html-differ/).
+Для вывода различий используется:
+* html — [html-differ](https://ru.bem.info/tools/testing/html-differ/).
+* json — [deep-diff](https://github.com/flitbit/diff).
 
 Формат вывода ошибок
 --------------------
@@ -119,7 +127,9 @@ BEM_TMPL_SPECS_REPORTERS=html,summary,spec
 ----------------------
 Для создания/обновления HTML эталонов вы можете либо выставить явно флаг `saveReferenceHtml` при конфигурации технологии, либо через переменную окружения — `BEM_TMPL_SPECS_SAVE_REFERENCE_HTML=1`
 
-Файл будет сохранён в `<level>.blocks/<block-name>/<block-name>.tmpl-specs/*.html`, рядом с исходным кодом блока.
+Файл будет сохранён в `<level>.blocks/<block-name>/<block-name>.tmpl-specs/*.{html,js}`, рядом с исходным кодом блока.
+
+Или можно использовать флаг `autoAddReference` для автоматической генерации недостающего эталона если таковой не найден, при условии что существует входной пример.
 
 Фильтрация тестов
 -----------------
@@ -204,6 +214,13 @@ module.exports = function (config) {
                     exportName: 'BEMHTML',
                     devMode: false
                 }
+            },
+            bemtree: {
+                tech: 'enb-bemxjst/techs/bemtree',
+                options: {
+                    sourceSuffixes: ['bemtree', 'bemtree.js'],
+                    exportName: 'BEMTREE',
+                }
             }
         }
     });
@@ -238,8 +255,10 @@ module.exports = function (config) {
 * *String* `completeBundle` – имя бандла, в котором будут собраны все БЭМ-сущности из уровней `levels`. По умолчанию `completeBundle` не будет собран.
 * *Boolean* `saveHtml` — сохранять результат HTML при успешной отрисовке в файл (env: `BEM_TMPL_SPECS_SAVE_HTML`);
 * *Boolean* `saveReferenceHtml` — создать/обновить эталон HTML рядом с BEMJSON (env: `BEM_TMPL_SPECS_SAVE_REFERENCE_HTML`);
+* *Boolean* `autoAddReference` — автоматически создавать недостающие эталоны, при условии что существуют входные примеры;
 * *String|Function* `depsTech` — технология для раскрытия зависимостей. По умолчанию — `deps-old`.
 * *Function* `mockI18N` — функция будет использована вместо ядра `i18n`, если указана опция `langs: true`.
+* *String* `stringifyIndent` — предпочтительный отступ для подсветки различий JSON объектов. По умолчанию два пробела.
 
 Запуск из консоли
 -----------------
