@@ -1,8 +1,6 @@
 var assert = require('assert'),
     path = require('path'),
     vow = require('${ paths['vow'] }'),
-    _ = require('lodash'),
-    stringifyObject = require('stringify-object'),
 <% if (saveHtml || saveReferenceHtml) { %>
     vowFs = require('${ paths['vow-fs'] }'),
     beautifyHtml = function(html) {
@@ -17,24 +15,24 @@ var assert = require('assert'),
     'font', 'ins', 'del', 'pre', 'address', 'dt',
     'q', 'i', 'b', 'u', 's', 'bdo', 'em'
     ]},
-    saveToFile = function(filenames, actual) {
+    saveHtmlFile = function(filenames, actual) {
         if (!Array.isArray(filenames)) {
             filenames = [filenames];
         }
-
-        var data = typeof actual === 'string' ?
-            beautifyHtml(actual) :
-            '(' + stringifyObject(actual, { indent: '    '}) + ')'; 
+        var html = beautifyHtml(actual);
 
         return vow.all(filenames.map(function(filename) {
-            return vowFs.write(filename, data, 'utf8');
+            return vowFs.write(filename, html, 'utf8');
         }));
     },
 <% } %>
     clearRequire = require('${ paths['clear-require'] }'),
     HtmlDiffer = require('${ paths['html-differ'] }').HtmlDiffer,
     htmlDiffer = new HtmlDiffer(${ JSON.stringify(diffOpts) }),
-    references = require('${ paths.references }');
+    referencesJSON = JSON.stringify(require('${ paths.references }')),
+    getReferences = function () {
+        return JSON.parse(referencesJSON);
+    };
 
 <%
 var prettifyEngineName = function(ngn) {
@@ -59,18 +57,18 @@ describe('${ describe }', function() {
                 filename += '.' + lang;
             }
 
-            filename += engine.name === 'bemhtml' ? '.html' : '.js';
+            filename += '.html';
 
             print(template('it', {
                 it: it,
-                before: 'var engine = ' + loadTemplate(
-                    engine.target, engine.exportName
-                ) + ';',
+                before: [
+                    'var references = getReferences();',
+                    'var engine = ' + loadTemplate(engine.target, engine.exportName) + ';',
+                ].join('\n'),
                 engine: engine,
                 lang: lang,
                 saveHtml: saveHtml,
                 saveReferenceHtml: saveReferenceHtml,
-                autoAddReference: autoAddReference,
                 htmlFilename: filename,
                 referenceHtmlFilename: engines.length > 1 ? filename : filename.replace('.' + engineName, '')
             }));
@@ -81,14 +79,13 @@ describe('${ describe }', function() {
 
 }); // /describe ${ describe }
 
-function assertResult(actual, expected) {
-    var isOk = typeof actual === 'string' ?
-        htmlDiffer.isEqual(actual, expected) :
-        _.isEqual(actual, expected);
-
-    isOk ?
-        assert.ok(actual) :
+function assertHtml(actual, expected) {
+   if (htmlDiffer.isEqual(actual, expected)) {
+        // Throw error if actual is empty
+        assert.ok(actual);
+    } else {
         assert.fail(actual, expected, null, '\n');
+    }
 }
 <%
 function loadTemplate(target, exportName) {

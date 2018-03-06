@@ -22,8 +22,6 @@
   "dependencies": {
     "bem-naming": "1.0.1",
     "clear-require": "1.0.1",
-    "deep-diff": "^0.3.8",
-    "deep-diff-highlight": "^0.1.0",
     "enb-bem-i18n": "1.1.1",
     "enb-bem-pseudo-levels": "0.4.0",
     "enb-bem-techs": "2.2.2",
@@ -38,7 +36,6 @@
     "minimatch": "3.0.3",
     "mocha": "3.2.0",
     "mocha-teamcity-reporter": "1.1.1",
-    "stringify-object": "^3.2.0",
     "vow": "0.4.15",
     "vow-fs": "0.3.6"
   },

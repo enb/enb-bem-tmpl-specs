@@ -8,16 +8,10 @@ it('should be equal `${ it }` by ${ engine.name }${ titleSuffix }', function () 
     ${ before }
 
     var ref = references['${ it }']${ subreference },
-        _this = this,
-        <% if (engine.name === 'bemtree') { %>
-            source = ref.data,
-            expected = ref.bemjson;
-        <% } else { %>
-            source = ref.bemjson,
-            expected = ref.html;
-        <% } %>
+        bemjson = ref.bemjson,
+        expected = ref.html;
 
-    <% if (saveHtml || saveReferenceHtml || autoAddReference) { %>
+    <% if (saveHtml || saveReferenceHtml) { %>
         var filenames = [];
     <% } %>
 
@@ -31,7 +25,7 @@ it('should be equal `${ it }` by ${ engine.name }${ titleSuffix }', function () 
 
     return new vow.Promise(function(resolve, reject) {
         <% if (engine.async) { %>
-            engine.apply(source, function(errs, actual) {
+            engine.apply(bemjson, function(errs, actual) {
                 if (errs !== null) {
                     reject(errs);
                     return;
@@ -40,26 +34,15 @@ it('should be equal `${ it }` by ${ engine.name }${ titleSuffix }', function () 
                 resolve(actual);
             });
         <% } else { %>
-            resolve(engine.apply(source));
+            resolve(engine.apply(bemjson));
         <% } %>
     }).then(function(actual) {
-        if (!actual) {
-            _this.skip();
-            return;
-        }
-        <% if (autoAddReference) {%>
-            if (!expected) {
-                filenames.push(path.join(ref.dir) + '/${ it }.${ engine.name === 'bemtree' ? 'bemjson.js' : 'html' }');
-            }
-        <% } %>
-
-
-        <% if (saveHtml || saveReferenceHtml || autoAddReference) { %>
-            return saveToFile(filenames, actual).always(function() {
-                return assertResult(actual, expected);
+        <% if (saveHtml || saveReferenceHtml) { %>
+            return saveHtmlFile(filenames, actual).always(function() {
+                return assertHtml(actual, expected);
             });
         <% } else { %>
-            return assertResult(actual, expected);
+            return assertHtml(actual, expected);
         <% } %>
     });
 
